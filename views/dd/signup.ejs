@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+    <!--===============================================================================================-->
+      <link rel="stylesheet" type="text/css" href="signin_signup/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+      <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+      <link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+      <link rel="stylesheet" type="text/css" href="/signin_signup/animate/animate.css">
+    <!--===============================================================================================-->	
+      <link rel="stylesheet" type="text/css" href="/signin_signup/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+      <link rel="stylesheet" type="text/css" href="/signin_signup/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+      <link rel="stylesheet" type="text/css" href="/signin_signup/select2/select2.min.css">
+    <!--===============================================================================================-->	
+      <link rel="stylesheet" type="text/css" href="/signin_signup/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+      <link rel="stylesheet" type="text/css" href="/signin_signup/main_css/util.css">
+      <link rel="stylesheet" type="text/css" href="/signin_signup/main_css/main.css">
+   
+  </head>
+  <body>
+      <div class="limiter">
+        <div class="container-login100">
+          <div class="wrap-login100">
+            <form action="/dd/signups" id="EmployeeForm" class="login100-form validate-form" method="post" role="form">
+              <% if( msg !=''){ %>
+                <div id="signupalert" class="alert alert-danger" >
+                  <p><%= msg %> </p>
+                </div>
+                <% } %>
+              <span class="login100-form-title p-b-43">
+                <%= title %>
+                <br>
+                District Director SignUp
+              </span>
+              
+
+              <label>Choose District:</label>
+              <select name="uname" class="form-control">
+                <option value="Barguna">Barguna</option>
+                <option value="Barisal"> Barisal</option>
+                <option value="Bhola">Bhola</option>
+                <option value="Jhalokathi">Jhalokathi</option>
+                <option value="Patuakhali">Patuakhali</option>
+                <option value="Pirojpur">Pirojpur</option>
+                <option value="Bandarban">Bandarban</option>
+                <option value="Brahmanbaria">Brahmanbaria</option>
+                <option value="Chandpur">Chandpur</option>
+                <option value="Chittagong">Chittagong</option>
+                <option value="Comilla">Comilla</option>
+                <option value="CoxsBazar">Cox's Bazar</option>
+                <option value="Feni">Feni</option>
+                <option value="Khagrachari">Khagrachari</option>
+                <option value="Lakshmipur">Lakshmipur</option>
+                <option value="Noakhali"> Noakhali</option>
+                <option value="Rangamati">Rangamati</option>
+                <option value="Dhaka">Dhaka</option>
+                <option value="Faridpur">Faridpur</option>
+                <option value="Gazipur">Gazipur</option>
+                <option value="Gopalganj">Gopalganj</option>
+                <option value="Kishoreganj">Kishoreganj</option>
+                <option value="Madaripur">Madaripur</option>
+                <option value="Manikganj">Manikganj</option>
+                <option value="Munshiganj"> Munshiganj</option>
+                <option value="Narayanganj"> Narayanganj</option>
+                <option value="Narsingdi">Narsingdi</option>
+                <option value="Rajbari">Rajbari</option>
+                <option value="Shariatpur"> Shariatpur</option>
+                <option value="Tangail"> Tangail</option>
+                <option value="Bagerhat">Bagerhat</option>
+                <option value="Chuadanga">Chuadanga</option>
+                <option value="Jessore"> Jessore</option>
+                <option value="Jhenaidah">Jhenaidah</option>
+                <option value="Khulna">Khulna</option>
+                <option value="Kushtia">Kushtia</option>
+                <option value="Magura">  Magura</option>
+                <option value="Meherpur"> Meherpur</option>
+                <option value="Narail"> Narail</option>
+                <option value="Satkhira">Satkhira</option>
+                <option value="Jamalpur">Jamalpur</option>
+                <option value="Mymensingh"> Mymensingh</option>
+                <option value="Netrokona"> Netrokona</option>
+                <option value="Sherpur"> Sherpur</option>
+                <option value="Bogra">Bogra</option>
+                <option value="Jaipurhat">Jaipurhat</option>
+                <option value="Naogaon">Naogaon</option>
+                <option value="Natore">Natore</option>
+                <option value="Nawabganj">Nawabganj</option>
+                <option value="Pabna">Pabna</option>
+                <option value="Rajshahi">Rajshahi</option>
+                <option value="Sirajganj">Sirajganj</option>
+                <option value="Gaibandha">Gaibandha</option>
+                <option value="Kurigram"> Kurigram</option>
+                <option value="Lalmonirhat">Lalmonirhat</option>
+                <option value="Nilphamari">Nilphamari</option>
+                <option value="Panchagarh"> Panchagarh</option>
+                <option value="Rangpur"> Rangpur</option>
+                <option value="Thakurgaon"> Thakurgaon</option>
+                <option value="Habiganj">Habiganj</option>
+                <option value="Moulvibazar">Moulvibazar</option>
+                <option value="Sunamganj">Sunamganj</option>
+                <option value="Sylhet">Sylhet</option>
+              </select>
+              
+              <div class="wrap-input100 validate-input" data-validate="Password is required">
+                <input class="input100" type="password" name="password" >
+                <span class="focus-input100"></span>
+                <span class="label-input100">Password</span>
+              </div>
+
+              <div class="wrap-input100 validate-input" data-validate="Password is required">
+                <input class="input100" type="password" name="confirmPassword" >
+                <span class="focus-input100"></span>
+                <span class="label-input100">Confirm Password</span>
+              </div>
+    
+            
+          
+    
+              <div class="container-login100-form-btn">
+                <button class="login100-form-btn">
+                  Sign up
+                </button>
+              </div>
+
+              <p class="text-center">If you have already created account, please do signin!</p>
+              <div class="container-login100-form-btn">
+                <a href="/dd/login" class="login100-form-btn">Sign In</a>
+               </button>
+             </div>
+              
+            </form>
+            
+            <div class="login100-more" style="background-image: url('/images/bg-01.jpg');">
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    <!--===============================================================================================-->
+	<script src="/signin_signup/jquery/jquery-3.2.1.min.js"></script>
+  <!--===============================================================================================-->
+    <script src="/signin_signup/animsition/js/animsition.min.js"></script>
+  <!--===============================================================================================-->
+    <script src="/signin_signup/bootstrap/js/popper.js"></script>
+    <script src="/signin_signup/bootstrap/js/bootstrap.min.js"></script>
+  <!--===============================================================================================-->
+    <script src="/signin_signup/select2/select2.min.js"></script>
+  <!--===============================================================================================-->
+    <script src="/signin_signup/daterangepicker/moment.min.js"></script>
+    <script src="/signin_signup/daterangepicker/daterangepicker.js"></script>
+  <!--===============================================================================================-->
+    <script src="/signin_signup/countdowntime/countdowntime.js"></script>
+  <!--===============================================================================================-->
+    <script src="/signin_signup/main_js/main.js"></script>
+  
+  </body>
+</html>

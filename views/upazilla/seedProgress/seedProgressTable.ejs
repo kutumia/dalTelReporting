@@ -1,0 +1,63 @@
+<%if (records.length >0){ %>
+    <table class="table table-bordered table-striped" id="tblCustomers" cellspacing="0" cellpadding="0">
+    <thead>
+    <tr>
+        <th>কৃষকের নাম</th>
+        <th>মোবাইল নং</th>
+        <th>গ্রাম</th>
+        <th>ব্লক</th>
+        <th>ইউনিয়ন</th>
+        <th>ফসলের নাম</th>
+        <th>জাত</th>
+        <th>বীজ বপণের তারিখ</th>
+        <th>গজানোর হার ও মাঠের সার্বিক অবস্থা</th>
+        <th>এসএএও'র নাম এবং মোবাইল নং</th>
+        <th>মুছুন</th>
+
+    </tr>
+    </thead>
+    <tbody>
+        <% records.forEach(function(row){ %>
+            <tr>
+                <td><%= row.name %></td>
+                <td><%= row.mnum %></td>
+                <td><%= row.village %></td>
+                <td><%= row.block %></td>
+                <td><%= row.union %></td>
+                <td><%= row.cname %></td>
+                <td><%= row.breed %></td>
+                <td><%= row.bopondate %></td>
+                <td><%= row.situation %></td>
+                <td><%= row.saao %></td>
+                    <td><a class="btn btn-primary btn-xs" href="/edit/<%= row.id %>"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-danger btn-xs" href="/delete/<%= row.id %>"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
+<% }else{ %>
+    <table class="table table-bordered table-striped" id="tblCustomers" cellspacing="0" cellpadding="0">
+        <thead>
+        <tr>
+            <th>কৃষকের নাম</th>
+            <th>মোবাইল নং</th>
+            <th>গ্রাম</th>
+            <th>ব্লক</th>
+            <th>ইউনিয়ন</th>
+            <th>ফসলের নাম</th>
+            <th>জাত</th>
+            <th>বীজ বপণের তারিখ</th>
+            <th>গজানোর হার ও মাঠের সার্বিক অবস্থা</th>
+            <th>এসএএও'র নাম এবং মোবাইল নং</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% records.forEach(function(row){ %>
+            <tr>
+                <td colspan="10">No data Found</td>
+            </tr>
+        <% }) %>
+        </tbody>
+    </table>
+<% } %>

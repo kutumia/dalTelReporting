@@ -1,0 +1,51 @@
+<%if (records.length >0){ %>
+    <table class="table table-bordered table-striped" id="tblCustomers" cellspacing="0" cellpadding="0">
+    <thead>
+    <tr>
+        <th>বীজ উৎপাদন ব্লকের/বীজ উদ্যোক্তাদের নাম ও ঠিকানা</th>
+        <th>উতপাদিত বীজের পরিমাণ জাতসহ (কেজিতে)</th>
+        <th>সংরক্ষিত বীজের পরিমাণ জাতসহ (কেজিতে)</th>
+        <th>বিক্রিত বীজের পরিমাণ জাতসহ (কেজিতে)</th>
+        <th>ক্রেতার নাম ও ঠিকানা</th>
+        <th>মন্তব্য</th>
+        <th>মুছুন</th>
+
+    </tr>
+    </thead>
+    <tbody>
+        <% records.forEach(function(row){ %>
+            <tr>
+                <td><%= row.name %></td>
+                <td><%= row.production %></td>
+                <td><%= row.preserved %></td>
+                <td><%= row.sold %></td>
+                <td><%= row.customer %></td>
+                <td><%= row.comment %></td>
+                <td><a class="btn btn-primary btn-xs" href="/edit/<%= row.id %>"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-danger btn-xs" href="/delete/<%= row.id %>"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
+<% }else{ %>
+    <table class="table table-bordered table-striped" id="tblCustomers" cellspacing="0" cellpadding="0">
+        <thead>
+        <tr>
+            <th>বীজ উৎপাদন ব্লকের/বীজ উদ্যোক্তাদের নাম ও ঠিকানা</th>
+            <th>উতপাদিত বীজের পরিমাণ জাতসহ (কেজিতে)</th>
+            <th>সংরক্ষিত বীজের পরিমাণ জাতসহ (কেজিতে)</th>
+            <th>বিক্রিত বীজের পরিমাণ জাতসহ (কেজিতে)</th>
+            <th>ক্রেতার নাম ও ঠিকানা</th>
+            <th>মন্তব্য</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% records.forEach(function(row){ %>
+            <tr>
+                <td colspan="10">No data Found</td>
+            </tr>
+        <% }) %>
+        </tbody>
+    </table>
+<% } %>

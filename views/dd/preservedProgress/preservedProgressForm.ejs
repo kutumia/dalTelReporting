@@ -1,0 +1,101 @@
+<%- include('../../includes/header')-%>
+        <div class="wrapper">
+          <%- include('../../includes/topbar')-%>
+            <div class="page-wrap">
+              <%- include('../../includes/sidebar')-%>
+              <div class="main-content">
+                <div class="container-fluid">
+                    <div class="row clearfix">
+                    <div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <div class="panel-title"><h2>বীজ উৎপাদনে ব্লকে উৎপাদিত ও সংরক্ষিত বীজের পরিমাণ ফর্ম</h2></div>
+                                <p><%
+                                if(success !=''){ %>
+                                <%= success %>
+                                    <% } %>
+                                </p>
+                                </div>  
+                            <div class="panel-body" >
+                                <form action="/dd/preservedProgressFormPost" id="FieldTrialForm" class="form-horizontal" method="post"  role="form">
+                                    <div id="signupalert" style="display:none" class="alert alert-danger">
+                                        <p>Error:</p>
+                                        <span></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="name" class="col-md-3 control-label">বীজ উৎপাদন ব্লকের/বীজ উদ্যোক্তাদের নাম ও ঠিকানা</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="name" placeholder="বীজ উৎপাদন ব্লকের/বীজ উদ্যোক্তাদের নাম ও ঠিকানা">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="production" class="col-md-3 control-label">উতপাদিত বীজের পরিমাণ জাতসহ (কেজিতে)</label>
+                                        <div class="col-md-9">
+                                        <input type="text" class="form-control" name="production" placeholder="উতপাদিত বীজের পরিমাণ জাতসহ (কেজিতে)">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="preserved" class="col-md-3 control-label">সংরক্ষিত বীজের পরিমাণ জাতসহ (কেজিতে)</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="preserved" placeholder="সংরক্ষিত বীজের পরিমাণ জাতসহ (কেজিতে)">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="sold" class="col-md-3 control-label">বিক্রিত বীজের পরিমাণ জাতসহ (কেজিতে)</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="sold" placeholder="বিক্রিত বীজের পরিমাণ জাতসহ (কেজিতে)">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="customer" class="col-md-3 control-label">ক্রেতার নাম ও ঠিকানা</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="customer" placeholder="ক্রেতার নাম ও ঠিকানা">
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <div class="form-group">
+                                        <label for="comment" class="col-md-3 control-label">মন্তব্য</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="comment" placeholder="মন্তব্য">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="year" class="col-md-3 control-label">বছর</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="year" placeholder="বছর">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="year" class="col-md-3 control-label">userid</label>
+                                        <div class="col-md-9">
+                                            <input type="number" class="form-control" name="user_id" placeholder="id" value="<%= user_id %>">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <!-- Button -->                                        
+                                        <div class="col-md-offset-3 col-md-9">
+                                        <input type="submit" name="submit" value="submit" class="btn btn-primary">   
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                        
+                                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<%- include('../../includes/footer')-%>

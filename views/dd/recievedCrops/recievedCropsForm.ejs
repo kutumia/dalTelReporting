@@ -1,0 +1,136 @@
+<%- include('../../includes/header')-%>
+        <div class="wrapper">
+          <%- include('../../includes/topbar')-%>
+            <div class="page-wrap">
+              <%- include('../../includes/sidebar')-%>
+              <div class="main-content">
+                <div class="container-fluid">
+                    <div class="row clearfix">
+                    <div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <div class="panel-title"><h2>ফসল সংগ্রহোত্তর প্রতিবেদন ফর্ম</h2></div>
+                                <p><%
+                                if(success !=''){ %>
+                                <%= success %>
+                                    <% } %>
+                                </p>
+                                </div>  
+                            <div class="panel-body" >
+                                <form action="/upazilla/recievedCropsFormPost" id="FieldTrialForm" class="form-horizontal" method="post"  role="form">
+                                    <div id="signupalert" style="display:none" class="alert alert-danger">
+                                        <p>Error:</p>
+                                        <span></span>
+                                    </div>
+
+                                        
+                                    <div class="form-group">
+                                        <label for="block" class="col-md-3 control-label">ব্লকের নাম,এসএএও-এর নাম ও মোবাইল নং</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="block" placeholder="ব্লকের নাম,এসএএও-এর নাম ও মোবাইল নং">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="farmer" class="col-md-3 control-label">এসএমই কৃষক/উতপাদনকারী কৃষকের নাম,ঠিকানা ও মোবাইল নং</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="farmer" placeholder="এসএমই কৃষক/উতপাদনকারী কৃষকের নাম,ঠিকানা ও মোবাইল নং">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="crop" class="col-md-3 control-label">ফসল</label>
+                                        <div class="col-md-9">
+                                        <input type="text" class="form-control" name="crop" placeholder="ফসল">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="breed" class="col-md-3 control-label">জাতের নাম</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="breed" placeholder="জাতের নাম">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="area" class="col-md-3 control-label">জমির পরিমাণ(একরে)</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="area" placeholder="জমির পরিমাণ(একরে)">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="bopondate" class="col-md-3 control-label">বপন/রোপণ তারিখ</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="bopondate" placeholder="বপন/রোপণ তারিখ">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="cutdate" class="col-md-3 control-label">কর্তনের তারিখ</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="cutdate" placeholder="কর্তনের তারিখ">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="folon" class="col-md-3 control-label">প্রদরশনীর প্লটের ফলন(কেজি)</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="folon" placeholder="প্রদরশনীর প্লটের ফলন(কেজি)">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="hectorfolon" class="col-md-3 control-label">হেক্টর প্রতি ফলন(মে.টন)</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="hectorfolon" placeholder="হেক্টর প্রতি ফলন(মে.টন)">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="seedAmount" class="col-md-3 control-label">সংরক্ষিত বীজের পরিমাণ(কেজি)</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="seedAmount" placeholder="সংরক্ষিত বীজের পরিমাণ(কেজি)">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="comment" class="col-md-3 control-label">মন্তব্য</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="comment" placeholder="মন্তব্যা">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="year" class="col-md-3 control-label">বছর</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="year" placeholder="বছর">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="year" class="col-md-3 control-label">userid</label>
+                                        <div class="col-md-9">
+                                            <input type="number" class="form-control" name="user_id" placeholder="id" value="<%= user_id %>">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <!-- Button -->                                        
+                                        <div class="col-md-offset-3 col-md-9">
+                                        <input type="submit" name="submit" value="submit" class="btn btn-primary">   
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                        
+                                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<%- include('../../includes/footer')-%>

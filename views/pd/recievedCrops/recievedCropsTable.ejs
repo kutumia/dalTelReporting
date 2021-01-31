@@ -1,0 +1,65 @@
+<%if (records.length >0){ %>
+    <table class="table table-bordered table-striped" id="tblCustomers" cellspacing="0" cellpadding="0">
+    <thead>
+    <tr>
+        <th>ব্লকের নাম,এসএএও-এর নাম ও মোবাইল নং</th>
+        <th>এসএমই কৃষক/উতপাদনকারী কৃষকের নাম,ঠিকানা ও মোবাইল নং</th>
+        <th>ফসল</th>
+        <th>জাতের নাম</th>
+        <th>জমির পরিমাণ(একরে)</th>
+        <th>বপন/রোপণ তারিখ</th>
+        <th>কর্তনের তারিখ</th>
+        <th>প্রদরশনীর প্লটের ফলন(কেজি)</th>
+        <th>হেক্টর প্রতি ফলন(মে.টন)</th>
+        <th>সংরক্ষিত বীজের পরিমাণ(কেজি)</th>
+        <th>মন্তব্য</th>
+        <th>মুছুন</th>
+    </tr>
+    </thead>
+    <tbody>
+        <% records.forEach(function(row){ %>
+            <tr>
+                <td><%= row.block %></td>
+                <td><%= row.farmer %></td>
+                <td><%= row.crop %></td>
+                <td><%= row.breed %></td>
+                <td><%= row.area %></td>
+                <td><%= row.bopondate %></td>
+                <td><%= row.cutdate %></td>
+                <td><%= row.folon %></td>
+                <td><%= row.hectorfolon %></td>
+                <td><%= row.seedAmount %></td>
+                <td><%= row.comment %></td>
+                <td><a class="btn btn-primary btn-xs" href="/edit/<%= row.id %>"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-danger btn-xs" href="/delete/<%= row.id %>"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
+<% }else{ %>
+    <table class="table table-bordered table-striped" id="tblCustomers" cellspacing="0" cellpadding="0">
+        <thead>
+        <tr>
+            <th>ব্লকের নাম,এসএএও-এর নাম ও মোবাইল নং</th>
+            <th>এসএমই কৃষক/উতপাদনকারী কৃষকের নাম,ঠিকানা ও মোবাইল নং</th>
+            <th>ফসল</th>
+            <th>জাতের নাম</th>
+            <th>জমির পরিমাণ(একরে)</th>
+            <th>বপন/রোপণ তারিখ</th>
+            <th>কর্তনের তারিখ</th>
+            <th>প্রদরশনীর প্লটের ফলন(কেজি)</th>
+            <th>হেক্টর প্রতি ফলন(মে.টন)</th>
+            <th>সংরক্ষিত বীজের পরিমাণ(কেজি)</th>
+            <th>মন্তব্য</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% records.forEach(function(row){ %>
+            <tr>
+                <td colspan="10">No data Found</td>
+            </tr>
+        <% }) %>
+        </tbody>
+    </table>
+<% } %>

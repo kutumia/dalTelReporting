@@ -1,0 +1,74 @@
+<%if (records.length >0){ %>
+    <table class="table table-bordered table-striped" id="tblCustomers" cellspacing="0" cellpadding="0">
+    <thead>
+    <tr>
+        <th>অঞ্চলের নাম</th>
+        <th>জেলার নাম</th>
+        <th>উপজেলার নাম</th>
+        <th>ফসল</th>
+        <th>প্রদরশনীর সংখ্যা</th>
+        <th>বীজ বপন</th>
+        <th>জৈবসার সরবরাহ</th>
+        <th>রাসায়নিক সার সরবরাহ</th>
+        <th>বীজ শোধন</th>
+        <th>বালাইনাশক</th>
+        <th>আগাছা বাছাই ও রগিং</th>
+        <th>সাইনবোর্ড ও খুটি</th>
+        <th>রেজিস্টার লিখন</th>
+        <th>মন্তব্য/ফসলের সার্বিক অবস্থা</th>
+        <th>মুছুন</th>
+    </tr>
+    </thead>
+    <tbody>
+        <% records.forEach(function(row){ %>
+            <tr>
+                <td><%= row.aname %></td>
+                <td><%= row.dname %></td>
+                <td><%= row.upazilla %></td>
+                <td><%= row.crop %></td>
+                <td><%= row.trialnum %></td>
+                <td><%= row.seed %></td>
+                <td><%= row.organic %></td>
+                <td><%= row.chemical %></td>
+                <td><%= row.purify %></td>
+                <td><%= row.balainashok %></td>
+                <td><%= row.agacha %></td>
+                <td><%= row.signboard %></td>
+                <td><%= row.register %></td>
+                <td><%= row.comment %></td>
+                <td><a class="btn btn-primary btn-xs" href="/edit/<%= row.id %>"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-danger btn-xs" href="/delete/<%= row.id %>"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
+<% }else{ %>
+    <table class="table table-bordered table-striped" id="tblCustomers" cellspacing="0" cellpadding="0">
+        <thead>
+        <tr>
+            <th>অঞ্চলের নাম</th>
+            <th>জেলার নাম</th>
+            <th>উপজেলার নাম</th>
+            <th>ফসল</th>
+            <th>প্রদরশনীর সংখ্যা</th>
+            <th>বীজ বপন</th>
+            <th>জৈবসার সরবরাহ</th>
+            <th>রাসায়নিক সার সরবরাহ</th>
+            <th>বীজ শোধন</th>
+            <th>বালাইনাশক</th>
+            <th>আগাছা বাছাই ও রগিং</th>
+            <th>সাইনবোর্ড ও খুটি</th>
+            <th>রেজিস্টার লিখন</th>
+            <th>মন্তব্য/ফসলের সার্বিক অবস্থা</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% records.forEach(function(row){ %>
+            <tr>
+                <td colspan="10">No data Found</td>
+            </tr>
+        <% }) %>
+        </tbody>
+    </table>
+<% } %>

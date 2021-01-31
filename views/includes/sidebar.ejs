@@ -1,0 +1,135 @@
+<div class="app-sidebar colored">
+    <div class="sidebar-header">
+        <a class="header-brand" href="../index.ejs">
+           
+            <span class="text"><%= locals.type %> Admin </span>
+        </a>
+       
+      </div>
+    
+
+
+      <% if(locals.type === "pd"){%>
+        <div class="sidebar-content">
+            <div class="nav-container">
+                <nav id="main-menu-navigation" class="navigation-main">
+                    <div class="nav-lavel">Navigation</div>
+                <div class="nav-item active">
+                    <a href="/pd/dashboard"><i class="ik ik-bar-chart-2"></i><span>ড্যাশবোর্ড</span></a>
+                </div>
+
+                <div class="nav-lavel">জেলা উপপরিচালক কর্তৃক <br>প্রেরিত প্রতিবেদন</div>
+                <div class="nav-item">
+                    <a href="/pd/progress"><i class="ik ik-package"></i><span>অগ্রগতির প্রতিবেদন</span></a>
+                </div>
+                <div class="nav-item">
+                    <a href="/pd/preservedProgress"><i class="ik ik-package"></i><span>ব্লকে উৎপাদিত ও <br>সংরক্ষিত বীজের পরিমাণ</span></a>
+                </div>
+               
+                <div class="nav-lavel">উপজেলা উপপরিচালক কর্তৃক <br>প্রেরিত প্রদর্শনীর প্রতিবেদন</div>
+                <div class="nav-item">
+                    <a href="/pd/seedInitial"><i class="ik ik-package"></i><span>বীজ উৎপাদন ব্লকের <br>কৃষকের প্রাথমিক প্রতিবেদন</span></a>
+                </div>
+                <div class="nav-item">
+                    <a href="/pd/blockProgress"><i class="ik ik-package"></i><span>বীজ উৎপাদন ব্লকের <br>অগ্রগতি পরিবীক্ষণ</span></a>
+                </div>
+                <div class="nav-item">
+                    <a href="/pd/seedProgress"><i class="ik ik-package"></i><span>বীজ বপনের <br>অগ্রগতির প্রতিবেদন</span></a>
+                </div>
+                <div class="nav-item">
+                    <a href="/pd/recievedCrops"><i class="ik ik-package"></i><span>ফসল সংগ্রহোত্তর প্রতিবেদন</span></a>
+                </div>
+
+
+                <div class="nav-lavel">উপজেলা উপপরিচালক কর্তৃক <br>প্রেরিত মৌচাষ বিষয়ক প্রতিবেদন</div>
+                <div class="nav-item">
+                    <a href="/pd/honey"><i class="ik ik-package"></i><span>মৌচাষী সংক্রান্ত তথ্য</span></a>
+                </div>
+
+                    
+    
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+    
+    <% }else if (locals.type === "dd"){%>
+        <div class="sidebar-content">
+            <div class="nav-container">
+                <nav id="main-menu-navigation" class="navigation-main">
+                    <div class="nav-lavel">Navigation</div>
+                <div class="nav-item active">
+                    <a href="/dd/dashboard"><i class="ik ik-bar-chart-2"></i><span>ড্যাশবোর্ড</span></a>
+                </div>
+               
+                <div class="nav-lavel">জেলা উপপরিচালক কর্তৃক <br>প্রেরিত প্রতিবেদন</div>
+                <div class="nav-item">
+                    <a href="/dd/progress"><i class="ik ik-package"></i><span>অগ্রগতির প্রতিবেদন</span></a>
+                </div>
+                <div class="nav-item">
+                    <a href="/dd/preservedProgress"><i class="ik ik-package"></i><span>ব্লকে উৎপাদিত ও <br>সংরক্ষিত বীজের পরিমাণ</span></a>
+                </div>
+
+                <div class="nav-lavel">উপজেলা উপপরিচালক কর্তৃক <br>প্রেরিত প্রদর্শনীর প্রতিবেদন</div>
+                <div class="nav-item">
+                    <a href="/dd/seedInitial"><i class="ik ik-package"></i><span>বীজ উৎপাদন ব্লকের <br>কৃষকের প্রাথমিক প্রতিবেদন</span></a>
+                </div>
+                <div class="nav-item">
+                    <a href="/dd/blockProgress"><i class="ik ik-package"></i><span>বীজ উৎপাদন ব্লকের <br>অগ্রগতি পরিবীক্ষণ</span></a>
+                </div>
+                <div class="nav-item">
+                    <a href="/dd/seedProgress"><i class="ik ik-package"></i><span>বীজ বপনের <br>অগ্রগতির প্রতিবেদন</span></a>
+                </div>
+                <div class="nav-item">
+                    <a href="/dd/recievedCrops"><i class="ik ik-package"></i><span>ফসল সংগ্রহোত্তর প্রতিবেদন</span></a>
+                </div>
+
+
+                <div class="nav-lavel">উপজেলা উপপরিচালক কর্তৃক <br>প্রেরিত মৌচাষ বিষয়ক প্রতিবেদন</div>
+                <div class="nav-item">
+                    <a href="/dd/honey"><i class="ik ik-package"></i><span>মৌচাষী সংক্রান্ত তথ্য</span></a>
+                </div>
+                    
+    
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+<% }else { %>
+    <div class="sidebar-content">
+        <div class="nav-container">
+            <nav id="main-menu-navigation" class="navigation-main">
+                <div class="nav-lavel">Navigation</div>
+                <div class="nav-item active">
+                    <a href="/upazilla/dashboard"><i class="ik ik-bar-chart-2"></i><span>ড্যাশবোর্ড</span></a>
+                </div>
+               
+                <div class="nav-lavel">প্রদর্শনীর প্রতিবেদন</div>
+                <div class="nav-item">
+                    <a href="/upazilla/seedInitial"><i class="ik ik-package"></i><span>বীজ উৎপাদন ব্লকের <br>কৃষকের প্রাথমিক প্রতিবেদন</span></a>
+                </div>
+                <div class="nav-item">
+                    <a href="/upazilla/blockProgress"><i class="ik ik-package"></i><span>বীজ উৎপাদন ব্লকের <br>অগ্রগতি পরিবীক্ষণ</span></a>
+                </div>
+                <div class="nav-item">
+                    <a href="/upazilla/seedProgress"><i class="ik ik-package"></i><span>বীজ বপনের <br>অগ্রগতির প্রতিবেদন</span></a>
+                </div>
+                <div class="nav-item">
+                    <a href="/upazilla/recievedCrops"><i class="ik ik-package"></i><span>ফসল সংগ্রহোত্তর প্রতিবেদন</span></a>
+                </div>
+                
+                
+
+
+                <div class="nav-lavel">মৌচাষী</div>
+                <div class="nav-item">
+                    <a href="/upazilla/honey"><i class="ik ik-package"></i><span>মৌচাষী সংক্রান্ত তথ্য</span></a>
+                </div>
+                
+            </nav>
+        </div>
+    </div>
+</div>
+<% }   %>

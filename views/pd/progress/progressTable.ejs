@@ -1,0 +1,57 @@
+<%if (records.length >0){ %>
+    <table class="table table-bordered table-striped" id="tblCustomers" cellspacing="0" cellpadding="0">
+    <thead>
+    <tr>
+        <th>উপজেলার নাম</th>
+        <th>মোট এসএমইর'র সংখ্যা</th>
+        <th>উপজেলাতে বরাদ্দকৃত বাৎসরিক ব্লক প্রদর্শনীর সংখ্যা (রবি)</th>
+        <th>উপজেলাতে বরাদ্দকৃত বাৎসরিক ব্লক প্রদর্শনীর সংখ্যা (খরিফ-১)</th>
+        <th>উপজেলাতে বরাদ্দকৃত বাৎসরিক ব্লক প্রদর্শনীর সংখ্যা (খরিফ-২)</th>
+        <th>মাঠে বপনকৃত অবস্থায় আছে এমন ব্লক প্রদর্শনীর সংখ্যা</th>
+        <th>গজানোর হার ও মাঠের সার্বিক অবস্থা</th>
+        <th>মন্তব্য</th> 
+        <th>মুছুন</th>
+
+    </tr>
+    </thead>
+    <tbody>
+        <% records.forEach(function(row){ %>
+            <tr>
+                <td><%= row.upazilla %></td>
+                <td><%= row.sme %></td>
+                <td><%= row.robi %></td>
+                <td><%= row.kharifone %></td>
+                <td><%= row.khariftwo %></td>
+                <td><%= row.block %></td>
+                <td><%= row.gojano %></td>
+                <td><%= row.comment %></td>
+                <td><a class="btn btn-primary btn-xs" href="/edit/<%= row.id %>"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-danger btn-xs" href="/delete/<%= row.id %>"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
+<% }else{ %>
+    <table class="table table-bordered table-striped" id="tblCustomers" cellspacing="0" cellpadding="0">
+        <thead>
+        <tr>
+            <th>উপজেলার নাম</th>
+            <th>মোট এসএমইর'র সংখ্যা</th>
+            <th>উপজেলাতে বরাদ্দকৃত বাৎসরিক ব্লক প্রদর্শনীর সংখ্যা (রবি)</th>
+            <th>উপজেলাতে বরাদ্দকৃত বাৎসরিক ব্লক প্রদর্শনীর সংখ্যা (খরিফ-১)</th>
+            <th>উপজেলাতে বরাদ্দকৃত বাৎসরিক ব্লক প্রদর্শনীর সংখ্যা (খরিফ-২)</th>
+            <th>মাঠে বপনকৃত অবস্থায় আছে এমন ব্লক প্রদর্শনীর সংখ্যা</th>
+            <th>গজানোর হার ও মাঠের সার্বিক অবস্থা</th>
+            <th>মন্তব্য</th> 
+        </tr>
+        </thead>
+        <tbody>
+        <% records.forEach(function(row){ %>
+            <tr>
+                <td colspan="10">No data Found</td>
+            </tr>
+        <% }) %>
+        </tbody>
+    </table>
+<% } %>

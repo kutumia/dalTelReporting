@@ -1,0 +1,144 @@
+<%- include('../../includes/header')-%>
+        <div class="wrapper">
+          <%- include('../../includes/topbar')-%>
+            <div class="page-wrap">
+              <%- include('../../includes/sidebar')-%>
+              <div class="main-content">
+                <div class="container-fluid">
+                    <div class="row clearfix">
+                    <div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <div class="panel-title"><h2>মৌচাষী সংক্রান্ত তথ্য ফর্ম</h2></div>
+                                <p><%
+                                if(success !=''){ %>
+                                <%= success %>
+                                    <% } %>
+                                </p>
+                                </div>  
+                            <div class="panel-body" >
+                                <form action="/upazilla/honeyFormPost" id="FieldTrialForm" class="form-horizontal" method="post"  role="form">
+                                    <div id="signupalert" style="display:none" class="alert alert-danger">
+                                        <p>Error:</p>
+                                        <span></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="upazilla" class="col-md-3 control-label">উপজেলা</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="upazilla" placeholder="উপজেলা">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="name" class="col-md-3 control-label">মৌ চাষীর নাম</label>
+                                        <div class="col-md-9">
+                                        <input type="text" class="form-control" name="name" placeholder="মৌ চাষীর নাম">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="address" class="col-md-3 control-label">ঠিকানা</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="address" placeholder="ঠিকানা">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="mnum" class="col-md-3 control-label">মোবাইল নং</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="mnum" placeholder="মোবাইল নং">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="box" class="col-md-3 control-label">মৌ বক্সের সংখ্যা</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="box" placeholder="মৌ বক্সের সংখ্যা">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="production" class="col-md-3 control-label">বার্ষিক মধু উতপাদন(কেজি)</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="production" placeholder="বার্ষিক মধু উতপাদন(কেজি)">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="foshol" class="col-md-3 control-label">মৌ চাষে নিজস্ব ফসল</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="foshol" placeholder="মৌ চাষে নিজস্ব ফসল">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="whichbox" class="col-md-3 control-label">কোন কোন বক্সে ফসলে মৌ বক্স স্থাপন করা হয়</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="whichbox" placeholder="কোন কোন বক্সে ফসলে মৌ বক্স স্থাপন করা হয়">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-9">
+                                            <label for="sthanio">স্থানীয়/ভ্রাম্যমাণ বাছুন:</label>
+                                        <select id="sthanio" name="sthanio" required>
+                                            <option value="স্থানীয়">স্থানীয়</option>
+                                            <option value="ভ্রাম্যমাণ">ভ্রাম্যমাণ</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="experience" class="col-md-3 control-label">মৌচাষে অভিজ্ঞতা বছর</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="experience" placeholder="মৌচাষে অভিজ্ঞতা বছর">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-9">
+                                            <label for="sme">বীজ এসএমই-এর সদস্য(হা/না) বাছুন:</label>
+                                        <select id="sme" name="sme" required>
+                                            <option value="হা">হা</option>
+                                            <option value="না">না</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-9">
+                                            <label for="year">বছর :</label>
+                                        <select id="year" name="year" required>
+                                            <option value="2017">২০১৭-১৮</option>
+                                            <option value="2018">২০১৮-১৯</option>
+                                            <option value="2019">২০১৯-২০</option>
+                                            <option value="2020">২০২০-২১</option>
+                                            <option value="2021">২০২১-২২</option>
+                                            <option value="2022">২০২২-২৩</option>
+                                        </select>
+                                        </div>
+                                    </div>
+
+                                            <input type="hidden" class="form-control" name="user_id" placeholder="id" value="<%= user_id %>">
+                                        
+                                    
+                                    <div class="form-group">
+                                        <!-- Button -->                                        
+                                        <div class="col-md-offset-3 col-md-9">
+                                        <input type="submit" name="submit" value="submit" class="btn btn-primary">   
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                        
+                                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<%- include('../../includes/footer')-%>
