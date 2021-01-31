@@ -62,10 +62,10 @@ app.use('/dd', ddRouter);
 
 
 const db = require("./models");
-db.sequelize.sync();
+db.sequelize.sync().catch(err=>console.log(err.message))
 
 db.sequelize.sync({ force: false }).then(() => {
   console.log("Drop and re-sync db.");
-});
+}).catch(err=>console.log(err.message))
 
 module.exports = app;

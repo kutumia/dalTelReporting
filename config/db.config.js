@@ -1,8 +1,11 @@
+const dotenv = require('dotenv');
+dotenv.config()
+const { DBHOST, DBUSER, DBPASSWORD, DB } = process.env;
 module.exports = {
-    HOST: "localhost",
-    USER: "root",
-    PASSWORD: "",
-    DB: "dalreporting",
+    HOST: DBHOST,
+    USER: DBUSER,
+    PASSWORD: DBPASSWORD,
+    DB: DB,
     dialect: "mysql",
     pool: {
       max: 5,
@@ -11,3 +14,4 @@ module.exports = {
       idle: 10000
     }
   };
+
