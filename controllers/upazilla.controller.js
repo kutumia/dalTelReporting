@@ -7,6 +7,9 @@ const honey = db.honey;
 const recievedCrops = db.recievedCrops;
 const seedInitial = db.seedInitial;
 const seedProgress = db.seedProgress;
+const review = db.review;
+const motivation = db.motivation;
+const fieldDay = db.fieldDay;
 
 
 const jwt= require('jsonwebtoken');
@@ -137,6 +140,345 @@ module.exports.upazillasignuppost=async(req,res)=>{
     } 
 };
 //signUp controller end
+
+//fieldDay controller
+module.exports.fieldDay=async(req,res)=>{
+    await fieldDay.findAll({
+        where: {upazilla: req.session.user_id}
+    })
+    .then(data => {
+        console.log("inside",data);
+        res.render('upazilla/fieldDay/fieldDay', { title: 'ফসল সংগ্রহোত্তর প্রতিবেদন',success:'', records: data });
+    })
+    .catch(err => {
+        console.log("outside",err);
+    })
+     
+    //  records:result
+
+};
+
+module.exports.fieldDayYear=async(req,res)=>{
+    await fieldDay.findAll({
+        where: {year: req.body.year,upazilla_id: req.session.user_id}
+    })
+    .then(data => {
+        res.render('upazilla/fieldDay/fieldDayTable', {records: data} ,function(err, html) {
+            res.send(html);
+        });
+    })
+    .catch(err => {
+        console.log("outside",err);    })
+
+};
+
+module.exports.fieldDayForm=async(req,res)=>{
+    res.render('upazilla/fieldDay/fieldDayForm', { title: 'ফসল সংগ্রহোত্তর প্রতিবেদন',msg:'' ,success:'',user_id: req.session.user_id});
+};
+
+module.exports.fieldDayFormPost=async(req,res)=>{
+    var date= req.body.date;
+    var present= req.body.present;
+    var male= req.body.male;
+    var female= req.body.female;
+    var resource= req.body.resource;
+    var resourceDetails= req.body.resourceDetails;
+    var year =req.body.year;
+    var user_id =req.body.user_id;
+
+    await fieldDay.create({
+        date: date,
+        present:present,
+        male:male,
+        female:female,
+        resource:resource,
+        resourceDetails:resourceDetails,
+        year:year,
+        upazilla_id:user_id
+    })
+        
+        .then(data => {
+            res.redirect('/upazilla/fieldDay');
+        }).catch(err => {
+            res.render('errorpage',err);
+        });
+  
+};
+module.exports.fieldDayEdit=async(req,res)=>{
+    await fieldDay.findByPk(req.params.id)
+    .then(data => {
+        console.log("inside");
+        res.render('upazilla/fieldDay/fieldDayEdit', { title: 'প্রশিক্ষণপ্রাপ্ত কৃষকের তথ্য',msg:'' ,success:'',records:data,user_id: req.session.user_id});
+    })
+    .catch(err => {
+        console.log("err");
+    })
+};
+module.exports.fieldDayEditPost=async(req,res)=>{
+    var date= req.body.date;
+    var present= req.body.present;
+    var male= req.body.male;
+    var female= req.body.female;
+    var resource= req.body.resource;
+    var resourceDetails= req.body.resourceDetails;
+    var year =req.body.year;
+    var user_id =req.body.user_id;
+
+    await fieldDay.update({
+        date: date,
+        present:present,
+        male:male,
+        female:female,
+        resource:resource,
+        resourceDetails:resourceDetails,
+        year:year,
+    },
+    {
+        where: {id: req.params.id}
+    })
+        .then(data => {
+            res.redirect('/upazilla/fieldDay');
+        }).catch(err => {
+            res.render('errorpage',err);
+        });
+  
+  
+};
+module.exports.fieldDayDelete=async(req,res)=>{
+    var fieldDayDelete = await fieldDay.findByPk(req.params.id);
+    try {
+        fieldDayDelete.destroy();
+        res.redirect("/upazilla/fieldDay");
+    }
+    catch{
+        res.render('errorpage',err);
+    }
+};
+//fieldDay controller end
+
+//motivation controller
+module.exports.motivation=async(req,res)=>{
+    await motivation.findAll({
+        where: {upazilla: req.session.user_id}
+    })
+    .then(data => {
+        console.log("inside",data);
+        res.render('upazilla/motivation/motivation', { title: 'ফসল সংগ্রহোত্তর প্রতিবেদন',success:'', records: data });
+    })
+    .catch(err => {
+        console.log("outside",err);
+    })
+     
+    //  records:result
+
+};
+
+module.exports.motivationYear=async(req,res)=>{
+    await motivation.findAll({
+        where: {year: req.body.year,upazilla_id: req.session.user_id}
+    })
+    .then(data => {
+        res.render('upazilla/motivation/motivationTable', {records: data} ,function(err, html) {
+            res.send(html);
+        });
+    })
+    .catch(err => {
+        console.log("outside",err);
+        })
+
+};
+
+module.exports.motivationForm=async(req,res)=>{
+    res.render('upazilla/motivation/motivationForm', { title: 'ফসল সংগ্রহোত্তর প্রতিবেদন',msg:'' ,success:'',user_id: req.session.user_id});
+};
+
+module.exports.motivationFormPost=async(req,res)=>{
+    var date= req.body.date;
+    var name= req.body.name;
+    var place= req.body.place;
+    var details= req.body.details;
+    var year =req.body.year;
+    var user_id =req.body.user_id;
+
+    await motivation.create({
+        date: date,
+        name:name,
+        place:place,
+        details:details,
+        year:year,
+        upazilla_id:user_id
+    })
+        
+        .then(data => {
+            res.redirect('/upazilla/motivation');
+        }).catch(err => {
+            res.render('errorpage',err);
+        });
+  
+};
+module.exports.motivationEdit=async(req,res)=>{
+    await motivation.findByPk(req.params.id)
+    .then(data => {
+        console.log("inside");
+        res.render('upazilla/motivation/motivationEdit', { title: 'প্রশিক্ষণপ্রাপ্ত কৃষকের তথ্য',msg:'' ,success:'',records:data,user_id: req.session.user_id});
+    })
+    .catch(err => {
+        console.log("err");
+    })
+};
+module.exports.motivationEditPost=async(req,res)=>{
+    var date= req.body.date;
+    var name= req.body.name;
+    var place= req.body.place;
+    var details= req.body.details;
+    var year =req.body.year;
+    var user_id =req.body.user_id;
+
+    await motivation.update({
+        date: date,
+        name:name,
+        place:place,
+        details:details,
+        year:year,
+    },
+    {
+        where: {id: req.params.id}
+    })
+        .then(data => {
+            res.redirect('/upazilla/motivation');
+        }).catch(err => {
+            res.render('errorpage',err);
+        });
+  
+  
+};
+module.exports.motivationDelete=async(req,res)=>{
+    var motivationDelete = await motivation.findByPk(req.params.id);
+    try {
+        motivationDelete.destroy();
+        res.redirect("/upazilla/motivation");
+    }
+    catch{
+        res.render('errorpage',err);
+    }
+};
+//motivation controller end
+
+//review controller
+module.exports.review=async(req,res)=>{
+    await review.findAll({
+        where: {upazilla: req.session.user_id}
+    })
+    .then(data => {
+        console.log("inside",data);
+        res.render('upazilla/review/review', { title: 'ফসল সংগ্রহোত্তর প্রতিবেদন',success:'', records: data });
+    })
+    .catch(err => {
+        console.log("outside",err);
+    })
+     
+    //  records:result
+
+};
+
+module.exports.reviewYear=async(req,res)=>{
+    await review.findAll({
+        where: {year: req.body.year,upazilla_id: req.session.user_id}
+    })
+    .then(data => {
+        res.render('upazilla/review/reviewTable', {records: data} ,function(err, html) {
+            res.send(html);
+        });
+    })
+    .catch(err => {
+        console.log("outside",err);
+    })
+
+};
+
+module.exports.reviewForm=async(req,res)=>{
+    res.render('upazilla/review/reviewForm', { title: 'ফসল সংগ্রহোত্তর প্রতিবেদন',msg:'' ,success:'',user_id: req.session.user_id});
+};
+
+module.exports.reviewFormPost=async(req,res)=>{
+    var date= req.body.date;
+    var present= req.body.present;
+    var male= req.body.male;
+    var female= req.body.female;
+    var resource= req.body.resource;
+    var resourceDetails= req.body.resourceDetails;
+    var year =req.body.year;
+    var user_id =req.body.user_id;
+
+    await review.create({
+        date: date,
+        present:present,
+        male:male,
+        female:female,
+        resource:resource,
+        resourceDetails:resourceDetails,
+        year:year,
+        upazilla_id:user_id
+    })
+        
+        .then(data => {
+            res.redirect('/upazilla/review');
+        }).catch(err => {
+            res.render('errorpage',err);
+        });
+  
+};
+module.exports.reviewEdit=async(req,res)=>{
+    await review.findByPk(req.params.id)
+    .then(data => {
+        console.log("inside");
+        res.render('upazilla/review/reviewEdit', { title: 'প্রশিক্ষণপ্রাপ্ত কৃষকের তথ্য',msg:'' ,success:'',records:data,user_id: req.session.user_id});
+    })
+    .catch(err => {
+        console.log("err");
+    })
+};
+module.exports.reviewEditPost=async(req,res)=>{
+    var date= req.body.date;
+    var present= req.body.present;
+    var male= req.body.male;
+    var female= req.body.female;
+    var resource= req.body.resource;
+    var resourceDetails= req.body.resourceDetails;
+    var year =req.body.year;
+    var user_id =req.body.user_id;
+
+    await review.update({
+        date: date,
+        present:present,
+        male:male,
+        female:female,
+        resource:resource,
+        resourceDetails:resourceDetails,
+        year:year,
+    },
+    {
+        where: {id: req.params.id}
+    })
+        .then(data => {
+            res.redirect('/upazilla/review');
+        }).catch(err => {
+            res.render('errorpage',err);
+        });
+  
+  
+};
+module.exports.reviewDelete=async(req,res)=>{
+    var reviewDelete = await review.findByPk(req.params.id);
+    try {
+        reviewDelete.destroy();
+        res.redirect("/upazilla/review");
+    }
+    catch{
+        res.render('errorpage',err);
+    }
+};
+//review controller end
 
 //blockProgress controller
 module.exports.blockProgress=async(req,res)=>{

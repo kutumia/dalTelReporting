@@ -29,6 +29,9 @@ db.seedInitial = require("./seedInitial.model.js")(sequelize, Sequelize);
 db.seedProgress = require("./seedProgress.model.js")(sequelize, Sequelize);
 db.progress = require("./progress.model.js")(sequelize, Sequelize);
 db.preservedProgress = require("./preservedProgress.model.js")(sequelize, Sequelize);
+db.review = require("./review.model.js")(sequelize, Sequelize);
+db.motivation = require("./motivation.model.js")(sequelize, Sequelize);
+db.fieldDay = require("./fieldDay.model.js")(sequelize, Sequelize);
 
 
 module.exports = db;
