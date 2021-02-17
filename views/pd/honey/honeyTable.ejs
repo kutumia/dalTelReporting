@@ -13,7 +13,7 @@
         <th>স্থানীয়/ভ্রাম্যমাণ</th>
         <th>মৌচাষে অভিজ্ঞতা বছর</th>
         <th>বীজ এসএমই-এর সদস্য(হা/না)</th>
-        <th>মুছুন</th>
+        
     </tr>
     </thead>
     <tbody>
@@ -30,9 +30,7 @@
                 <td><%= row.sthanio %></td>
                 <td><%= row.experience %></td>
                 <td><%= row.sme %></td>
-                <td><a class="btn btn-primary btn-xs" href="/edit/<%= row.id %>"><i class="fa fa-edit"></i></a>
-                    <a class="btn btn-danger btn-xs" href="/delete/<%= row.id %>"><i class="fa fa-trash"></i></a>
-                </td>
+                
             </tr>
         <% }) %>
     </tbody>

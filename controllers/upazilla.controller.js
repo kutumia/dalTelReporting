@@ -107,48 +107,58 @@ module.exports.upazillasignup=async(req,res)=>{
 };
 module.exports.upazillasignuppost=async(req,res)=>{
     try {
-        const{dds,uname,password,confirmPassword}=req.body;
-        const ddata=await dd.findAll();
-        const data = await upazilla.findAll({ where: {uname: uname} });
-        
-        if(data.length > 0){
-            res.render('upazilla/signup',{title: 'ডাল,তেল ও মসলা বীজ উৎপাদন সংরক্ষণ ও বিতরণ (৩য় পর্যায়) প্রকল্প',msg:'ERROR: The upazilla is already enrolled!',records: ddata})
+        const { dds, uname,upazillas, password, confirmPassword } = req.body;
+        const ddata = await dd.findAll();
+        const data = await upazilla.findAll({ where: { uname: uname } });
+    
+        if (data.length > 0) {
+          res.render("upazilla/signup", {
+            title:
+                "কৃষক পর্যায়ে উন্নতমানের ডাল,তেল ও মসলা বীজ উৎপাদন সংরক্ষণ ও বিতরণ (৩য় পর্যায়) প্রকল্প ",
+            msg: "ERROR: The upazilla is already enrolled!",
+            records: ddata,
+          });
+        } else if (password !== confirmPassword) {
+          res.render("upazilla/signup", {
+            title:
+                "কৃষক পর্যায়ে উন্নতমানের ডাল,তেল ও মসলা বীজ উৎপাদন সংরক্ষণ ও বিতরণ (৩য় পর্যায়) প্রকল্প ",
+            msg: "ERROR: Passwords do not match!",
+            records: ddata,
+          });
+        } else {
+          const hashedPassword = await bcrypt.hash(password, 10);
+          try {
+            const createupazilla = await upazilla.create({
+              uname: uname,
+              upazilla:upazillas,
+              password: hashedPassword,
+              dd_id: dds,
+              pd_id: 1,
+            });
+            res.render("upazilla/signup", {
+              title:
+                  "কৃষক পর্যায়ে উন্নতমানের ডাল,তেল ও মসলা বীজ উৎপাদন সংরক্ষণ ও বিতরণ (৩য় পর্যায়) প্রকল্প ",
+              msg: "upazilla Registered Successfully!",
+              records: ddata,
+            });
+          } catch (err) {
+            console.log(err);
+          }
         }
-        else if(password !== confirmPassword){
-           res.render('upazilla/signup',{title: 'ডাল,তেল ও মসলা বীজ উৎপাদন সংরক্ষণ ও বিতরণ (৩য় পর্যায়) প্রকল্প',msg:'ERROR: Passwords do not match!',records: ddata})
-        }
-        else{
-            const hashedPassword = await bcrypt.hash(password, 10);
-            console.log(hashedPassword);
-            try{
-                const createupazilla = await upazilla.create({
-                    uname: uname,
-                    password:hashedPassword,
-                    dd_id:dds,
-                    pd_id:1
-                    })
-                res.render('upazilla/signup',{title: 'ডাল,তেল ও মসলা বীজ উৎপাদন সংরক্ষণ ও বিতরণ (৩য় পর্যায়) প্রকল্প',msg:'upazilla Registered Successfully!',records: ddata})
-            }
-            catch (err) {
-                console.log(err);
-            }
-            
-        }
-    }
-    catch(error){
+      } catch (error) {
         console.log(error);
-    } 
+      }
 };
 //signUp controller end
 
 //fieldDay controller
 module.exports.fieldDay=async(req,res)=>{
     await fieldDay.findAll({
-        where: {upazilla: req.session.user_id}
+        where: {upazilla_id: req.session.user_id}
     })
     .then(data => {
         console.log("inside",data);
-        res.render('upazilla/fieldDay/fieldDay', { title: 'ফসল সংগ্রহোত্তর প্রতিবেদন',success:'', records: data });
+        res.render('upazilla/fieldDay/fieldDay', { title: 'মাঠ দিবস',success:'', records: data });
     })
     .catch(err => {
         console.log("outside",err);
@@ -173,7 +183,7 @@ module.exports.fieldDayYear=async(req,res)=>{
 };
 
 module.exports.fieldDayForm=async(req,res)=>{
-    res.render('upazilla/fieldDay/fieldDayForm', { title: 'ফসল সংগ্রহোত্তর প্রতিবেদন',msg:'' ,success:'',user_id: req.session.user_id});
+    res.render('upazilla/fieldDay/fieldDayForm', { title: 'মাঠ দিবস',msg:'' ,success:'',user_id: req.session.user_id});
 };
 
 module.exports.fieldDayFormPost=async(req,res)=>{
@@ -208,7 +218,7 @@ module.exports.fieldDayEdit=async(req,res)=>{
     await fieldDay.findByPk(req.params.id)
     .then(data => {
         console.log("inside");
-        res.render('upazilla/fieldDay/fieldDayEdit', { title: 'প্রশিক্ষণপ্রাপ্ত কৃষকের তথ্য',msg:'' ,success:'',records:data,user_id: req.session.user_id});
+        res.render('upazilla/fieldDay/fieldDayEdit', { title: 'মাঠ দিবস',msg:'' ,success:'',records:data,user_id: req.session.user_id});
     })
     .catch(err => {
         console.log("err");
@@ -259,11 +269,11 @@ module.exports.fieldDayDelete=async(req,res)=>{
 //motivation controller
 module.exports.motivation=async(req,res)=>{
     await motivation.findAll({
-        where: {upazilla: req.session.user_id}
+        where: {upazilla_id: req.session.user_id}
     })
     .then(data => {
         console.log("inside",data);
-        res.render('upazilla/motivation/motivation', { title: 'ফসল সংগ্রহোত্তর প্রতিবেদন',success:'', records: data });
+        res.render('upazilla/motivation/motivation', { title: 'মোটিভেশন ট্যুর',success:'', records: data });
     })
     .catch(err => {
         console.log("outside",err);
@@ -289,7 +299,7 @@ module.exports.motivationYear=async(req,res)=>{
 };
 
 module.exports.motivationForm=async(req,res)=>{
-    res.render('upazilla/motivation/motivationForm', { title: 'ফসল সংগ্রহোত্তর প্রতিবেদন',msg:'' ,success:'',user_id: req.session.user_id});
+    res.render('upazilla/motivation/motivationForm', { title: 'মোটিভেশন ট্যুর',msg:'' ,success:'',user_id: req.session.user_id});
 };
 
 module.exports.motivationFormPost=async(req,res)=>{
@@ -320,7 +330,7 @@ module.exports.motivationEdit=async(req,res)=>{
     await motivation.findByPk(req.params.id)
     .then(data => {
         console.log("inside");
-        res.render('upazilla/motivation/motivationEdit', { title: 'প্রশিক্ষণপ্রাপ্ত কৃষকের তথ্য',msg:'' ,success:'',records:data,user_id: req.session.user_id});
+        res.render('upazilla/motivation/motivationEdit', { title: 'মোটিভেশন ট্যুর',msg:'' ,success:'',records:data,user_id: req.session.user_id});
     })
     .catch(err => {
         console.log("err");
@@ -367,11 +377,11 @@ module.exports.motivationDelete=async(req,res)=>{
 //review controller
 module.exports.review=async(req,res)=>{
     await review.findAll({
-        where: {upazilla: req.session.user_id}
+        where: {upazilla_id: req.session.user_id}
     })
     .then(data => {
         console.log("inside",data);
-        res.render('upazilla/review/review', { title: 'ফসল সংগ্রহোত্তর প্রতিবেদন',success:'', records: data });
+        res.render('upazilla/review/review', { title: 'রিভিউ ডিস্কাশন',success:'', records: data });
     })
     .catch(err => {
         console.log("outside",err);
@@ -397,7 +407,7 @@ module.exports.reviewYear=async(req,res)=>{
 };
 
 module.exports.reviewForm=async(req,res)=>{
-    res.render('upazilla/review/reviewForm', { title: 'ফসল সংগ্রহোত্তর প্রতিবেদন',msg:'' ,success:'',user_id: req.session.user_id});
+    res.render('upazilla/review/reviewForm', { title: 'রিভিউ ডিস্কাশন',msg:'' ,success:'',user_id: req.session.user_id});
 };
 
 module.exports.reviewFormPost=async(req,res)=>{
@@ -432,7 +442,7 @@ module.exports.reviewEdit=async(req,res)=>{
     await review.findByPk(req.params.id)
     .then(data => {
         console.log("inside");
-        res.render('upazilla/review/reviewEdit', { title: 'প্রশিক্ষণপ্রাপ্ত কৃষকের তথ্য',msg:'' ,success:'',records:data,user_id: req.session.user_id});
+        res.render('upazilla/review/reviewEdit', { title: 'রিভিউ ডিস্কাশন',msg:'' ,success:'',records:data,user_id: req.session.user_id});
     })
     .catch(err => {
         console.log("err");
@@ -567,16 +577,70 @@ module.exports.blockProgressFormPost=async(req,res)=>{
   
 };
 module.exports.blockProgressEdit=async(req,res)=>{
-    var id=req.params.id;
-    console.log('id',id);
-    res.render('upazilla/blockProgress/blockProgressForm', { title: 'উপজেলাওয়ারী বীজ উতপাদনে ব্লকের অগ্রগতি',msg:'' ,success:'',user_id: req.session.user_id});
+    await blockProgress.findByPk(req.params.id)
+    .then(data => {
+        console.log("inside");
+        res.render('upazilla/blockProgress/blockProgressEdit', { title: 'উপজেলাওয়ারী বীজ উতপাদনে ব্লকের অগ্রগতি',msg:'' ,success:'',records:data,user_id: req.session.user_id});
+    })
+    .catch(err => {
+        console.log("err");
+    })
 };
+module.exports.blockProgressEditPost=async(req,res)=>{
+    var aname= req.body.aname;
+    var dname= req.body.dname;
+    var upazilla= req.body.upazilla;
+    var crop= req.body.crop;
+    var trialnum= req.body.trialnum;
+    var seed= req.body.seed;
+    var organic= req.body.organic;
+    var chemical= req.body.chemical;
+    var purify= req.body.purify;
+    var balainashok= req.body.balainashok;
+    var agacha= req.body.agacha;
+    var signboard= req.body.signboard;
+    var register= req.body.register;
+    var comment= req.body.comment;
+    var year =req.body.year;
+    var user_id =req.body.user_id;
 
-module.exports.blockProgressDelete=async(req,res)=>{
-   
+    await blockProgress.update({
+        aname: aname,
+        dname:dname,
+        upazilla:upazilla,
+        crop:crop,
+        trialnum:trialnum,
+        seed:seed,
+        organic:organic,
+        chemical:chemical,
+        purify:purify,
+        balainashok:balainashok,
+        agacha:agacha,
+        signboard:signboard,
+        register:register,
+        comment:comment,
+        year:year,
+    },
+    {
+        where: {id: req.params.id}
+    })
+        .then(data => {
             res.redirect('/upazilla/blockProgress');
-        
+        }).catch(err => {
+            res.render('errorpage',err);
+        });
   
+  
+};
+module.exports.blockProgressDelete=async(req,res)=>{
+    var blockProgressDelete = await blockProgress.findByPk(req.params.id);
+    try {
+        blockProgressDelete.destroy();
+        res.redirect("/upazilla/blockProgress");
+    }
+    catch{
+        res.render('errorpage',err);
+    }
 };
 //blockProgress controller end
 
@@ -657,15 +721,64 @@ module.exports.honeyFormPost=async(req,res)=>{
   
 };
 module.exports.honeyEdit=async(req,res)=>{
-    var id=req.params.id;
-    console.log('id',id);
-    res.render('upazilla/honey/honeyForm', { title: 'মৌচাষী সংক্রান্ত তথ্য',msg:'' ,success:'',user_id: req.session.user_id});
+    await honey.findByPk(req.params.id)
+    .then(data => {
+        console.log("inside");
+        res.render('upazilla/honey/honeyEdit', { title: 'মৌচাষী সংক্রান্ত তথ্য',msg:'' ,success:'',records:data,user_id: req.session.user_id});
+    })
+    .catch(err => {
+        console.log("err");
+    })
 };
+module.exports.honeyEditPost=async(req,res)=>{
+    var upazilla= req.body.upazilla;
+    var name= req.body.name;
+    var address= req.body.address;
+    var mnum= req.body.mnum;
+    var box= req.body.box;
+    var production= req.body.production;
+    var foshol= req.body.foshol;
+    var whichbox= req.body.whichbox;
+    var sthanio= req.body.sthanio;
+    var experience= req.body.experience;
+    var sme= req.body.sme;
+    var year =req.body.year;
+    var user_id =req.body.user_id;
 
-module.exports.honeyDelete=async(req,res)=>{
-    
+    await honey.update({
+        upazilla: upazilla,
+        name:name,
+        address:address,
+        mnum:mnum,
+        box:box,
+        production:production,
+        foshol:foshol,
+        whichbox:whichbox,
+        sthanio:sthanio,
+        experience:experience,
+        sme:sme,
+        year:year,
+    },
+    {
+        where: {id: req.params.id}
+    })
+        .then(data => {
             res.redirect('/upazilla/honey');
-        
+        }).catch(err => {
+            res.render('errorpage',err);
+        });
+  
+  
+};
+module.exports.honeyDelete=async(req,res)=>{
+    var honeyDelete = await honey.findByPk(req.params.id);
+    try {
+        honeyDelete.destroy();
+        res.redirect("/upazilla/honey");
+    }
+    catch{
+        res.render('errorpage',err);
+    }
 };
 //honey controller end
 
@@ -745,16 +858,64 @@ module.exports.recievedCropsFormPost=async(req,res)=>{
   
 };
 module.exports.recievedCropsEdit=async(req,res)=>{
-    var id=req.params.id;
-    console.log('id',id);
-    res.render('upazilla/recievedCrops/recievedCropsForm', { title: 'ফসল সংগ্রহোত্তর প্রতিবেদন',msg:'' ,success:'',user_id: req.session.user_id});
+    await recievedCrops.findByPk(req.params.id)
+    .then(data => {
+        console.log("inside");
+        res.render('upazilla/recievedCrops/recievedCropsEdit', { title: 'ফসল সংগ্রহোত্তর প্রতিবেদন',msg:'' ,success:'',records:data,user_id: req.session.user_id});
+    })
+    .catch(err => {
+        console.log("err");
+    })
 };
+module.exports.recievedCropsEditPost=async(req,res)=>{
+    var block= req.body.block;
+    var farmer= req.body.farmer;
+    var crop= req.body.crop;
+    var breed= req.body.breed;
+    var area= req.body.area;
+    var bopondate= req.body.bopondate;
+    var cutdate= req.body.cutdate;
+    var folon= req.body.folon;
+    var hectorfolon= req.body.hectorfolon;
+    var seedAmount= req.body.seedAmount;
+    var comment= req.body.comment;
+    var year =req.body.year;
+    var user_id =req.body.user_id;
 
-module.exports.recievedCropsDelete=async(req,res)=>{
-    
+    await recievedCrops.update({
+        block: block,
+        farmer:farmer,
+        crop:crop,
+        breed:breed,
+        area:area,
+        bopondate:bopondate,
+        cutdate:cutdate,
+        folon:folon,
+        hectorfolon:hectorfolon,
+        seedAmount:seedAmount,
+        comment:comment,
+        year:year,
+    },
+    {
+        where: {id: req.params.id}
+    })
+        .then(data => {
             res.redirect('/upazilla/recievedCrops');
-        
+        }).catch(err => {
+            res.render('errorpage',err);
+        });
   
+  
+};
+module.exports.recievedCropsDelete=async(req,res)=>{
+    var recievedCropsDelete = await recievedCrops.findByPk(req.params.id);
+    try {
+        recievedCropsDelete.destroy();
+        res.redirect("/upazilla/recievedCrops");
+    }
+    catch{
+        res.render('errorpage',err);
+    }
 };
 //recievedCrops controller end
 
@@ -831,15 +992,62 @@ module.exports.seedInitialFormPost=async(req,res)=>{
   
 };
 module.exports.seedInitialEdit=async(req,res)=>{
-    var id=req.params.id;
-    console.log('id',id);
-    res.render('upazilla/seedInitial/seedInitialForm', { title: 'বীজ উৎপাদন ব্লকের কৃষকের প্রাথমিক প্রতিবেদন',msg:'' ,success:'',user_id: req.session.user_id});
+    await seedInitial.findByPk(req.params.id)
+    .then(data => {
+        console.log("inside");
+        res.render('upazilla/seedInitial/seedInitialEdit', { title: 'বীজ উৎপাদন ব্লকের কৃষকের প্রাথমিক প্রতিবেদন',msg:'' ,success:'',records:data,user_id: req.session.user_id});
+    })
+    .catch(err => {
+        console.log("err");
+    })
 };
+module.exports.seedInitialEditPost=async(req,res)=>{
+    var name= req.body.name;
+    var fname= req.body.fname;
+    var mnum= req.body.mnum;
+    var nid= req.body.nid;
+    var village= req.body.village;
+    var block= req.body.block;
+    var union= req.body.union;
+    var cname= req.body.cname;
+    var breed= req.body.breed;
+    var saao= req.body.saao;
+    var year =req.body.year;
+    var user_id =req.body.user_id;
 
-module.exports.seedInitialDelete=async(req,res)=>{
-    
+    await seedInitial.update({
+        name: name,
+        fname:fname,
+        mnum:mnum,
+        nid:nid,
+        village:village,
+        block:block,
+        union:union,
+        cname:cname,
+        breed:breed,
+        saao:saao,
+        year:year,
+    },
+    {
+        where: {id: req.params.id}
+    })
+        .then(data => {
             res.redirect('/upazilla/seedInitial');
-       
+        }).catch(err => {
+            res.render('errorpage',err);
+        });
+  
+  
+};
+module.exports.seedInitialDelete=async(req,res)=>{
+    var seedInitialDelete = await seedInitial.findByPk(req.params.id);
+    try {
+        seedInitialDelete.destroy();
+        res.redirect("/upazilla/seedInitial");
+    }
+    catch{
+        res.render('errorpage',err);
+    }
 };
 //seedInitial controller end
 
@@ -918,15 +1126,61 @@ module.exports.seedProgressFormPost=async(req,res)=>{
   
 };
 module.exports.seedProgressEdit=async(req,res)=>{
-    var id=req.params.id;
-    console.log('id',id);
-    res.render('upazilla/seedProgress/seedProgressForm', { title: 'বীজ উৎপাদন ব্লকে বীজ বপনের অগ্রগতির প্রতিবেদন(বপনের দুই সপ্তাহের মধ্যে পাঠাতে হবে)',msg:'' ,success:'',user_id: req.session.user_id});
+    await seedProgress.findByPk(req.params.id)
+    .then(data => {
+        console.log("inside");
+        res.render('upazilla/seedProgress/seedProgressEdit', { title: 'বীজ উৎপাদন ব্লকে বীজ বপনের অগ্রগতির প্রতিবেদন(বপনের দুই সপ্তাহের মধ্যে পাঠাতে হবে)',msg:'' ,success:'',records:data,user_id: req.session.user_id});
+    })
+    .catch(err => {
+        console.log("err");
+    })
 };
+module.exports.seedProgressEditPost=async(req,res)=>{
+    var name= req.body.name;
+    var mnum= req.body.mnum;
+    var village= req.body.village;
+    var block= req.body.block;
+    var union= req.body.union;
+    var cname= req.body.cname;
+    var breed= req.body.breed;
+    var bopondate= req.body.bopondate;
+    var situation= req.body.situation;
+    var saao= req.body.saao;
+    var year =req.body.year;
+    var user_id =req.body.user_id;
 
-module.exports.seedProgressDelete=async(req,res)=>{
-    
+    await seedProgress.update({
+        name: name,
+        mnum:mnum,
+        village:village,
+        block:block,
+        union:union,
+        cname:cname,
+        breed:breed,
+        bopondate:bopondate,
+        situation:situation,
+        saao:saao,
+        year:year,
+    },
+    {
+        where: {id: req.params.id}
+    })
+        .then(data => {
             res.redirect('/upazilla/seedProgress');
-        
+        }).catch(err => {
+            res.render('errorpage',err);
+        });
   
+  
+};
+module.exports.seedProgressDelete=async(req,res)=>{
+    var seedProgressDelete = await seedProgress.findByPk(req.params.id);
+    try {
+        seedProgressDelete.destroy();
+        res.redirect("/upazilla/seedProgress");
+    }
+    catch{
+        res.render('errorpage',err);
+    }
 };
 //seedProgress controller end

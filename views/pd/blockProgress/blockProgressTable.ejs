@@ -16,7 +16,7 @@
         <th>সাইনবোর্ড ও খুটি</th>
         <th>রেজিস্টার লিখন</th>
         <th>মন্তব্য/ফসলের সার্বিক অবস্থা</th>
-        <th>মুছুন</th>
+        
     </tr>
     </thead>
     <tbody>
@@ -36,9 +36,7 @@
                 <td><%= row.signboard %></td>
                 <td><%= row.register %></td>
                 <td><%= row.comment %></td>
-                <td><a class="btn btn-primary btn-xs" href="/edit/<%= row.id %>"><i class="fa fa-edit"></i></a>
-                    <a class="btn btn-danger btn-xs" href="/delete/<%= row.id %>"><i class="fa fa-trash"></i></a>
-                </td>
+             
             </tr>
         <% }) %>
     </tbody>

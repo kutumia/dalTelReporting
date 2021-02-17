@@ -29,8 +29,8 @@
                 <td><%= row.bopondate %></td>
                 <td><%= row.situation %></td>
                 <td><%= row.saao %></td>
-                    <td><a class="btn btn-primary btn-xs" href="/edit/<%= row.id %>"><i class="fa fa-edit"></i></a>
-                    <a class="btn btn-danger btn-xs" href="/delete/<%= row.id %>"><i class="fa fa-trash"></i></a>
+                <td><a class="btn btn-primary btn-xs" href="/upazilla/seedProgressEdit/<%= row.id %>"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-danger btn-xs" href="/upazilla/seedProgressDelete/<%= row.id %>"><i class="fa fa-trash"></i></a>
                 </td>
             </tr>
         <% }) %>

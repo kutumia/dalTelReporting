@@ -13,7 +13,6 @@
         <th>হেক্টর প্রতি ফলন(মে.টন)</th>
         <th>সংরক্ষিত বীজের পরিমাণ(কেজি)</th>
         <th>মন্তব্য</th>
-        <th>মুছুন</th>
     </tr>
     </thead>
     <tbody>
@@ -30,9 +29,7 @@
                 <td><%= row.hectorfolon %></td>
                 <td><%= row.seedAmount %></td>
                 <td><%= row.comment %></td>
-                <td><a class="btn btn-primary btn-xs" href="/edit/<%= row.id %>"><i class="fa fa-edit"></i></a>
-                    <a class="btn btn-danger btn-xs" href="/delete/<%= row.id %>"><i class="fa fa-trash"></i></a>
-                </td>
+          
             </tr>
         <% }) %>
     </tbody>

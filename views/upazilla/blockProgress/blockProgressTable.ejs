@@ -37,8 +37,8 @@
                 <td><%= row.signboard %></td>
                 <td><%= row.register %></td>
                 <td><%= row.comment %></td>
-                <td><a class="btn btn-primary btn-xs" href="/edit/<%= row.id %>"><i class="fa fa-edit"></i></a>
-                    <a class="btn btn-danger btn-xs" href="/delete/<%= row.id %>"><i class="fa fa-trash"></i></a>
+                <td><a class="btn btn-primary btn-xs" href="/upazilla/blockProgressEdit/<%= row.id %>"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-danger btn-xs" href="/upazilla/blockProgressDelete/<%= row.id %>"><i class="fa fa-trash"></i></a>
                 </td>
             </tr>
         <% }) %>

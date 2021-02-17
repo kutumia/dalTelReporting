@@ -10,6 +10,10 @@ const seedInitial = db.seedInitial;
 const seedProgress = db.seedProgress;
 const progress = db.progress;
 const preservedProgress = db.preservedProgress;
+const review = db.review;
+const motivation = db.motivation;
+const fieldDay = db.fieldDay;
+
 
 const jwt= require('jsonwebtoken');
 const bcrypt= require('bcryptjs'); 
@@ -131,6 +135,147 @@ module.exports.pdsignuppost=async(req,res)=>{
     } 
 };
 //signUp controller end
+
+//fieldDay controller
+module.exports.fieldDay=async(req,res)=>{
+    try{
+        var districts=await dd.findAll();
+        console.log("inside");
+        res.render('pd/fieldDay/fieldDay', { title: 'মাঠ দিবস',success:'',district:districts });
+    }
+    catch(err){
+        console.log("outside",err);
+        res.render('pd/fieldDay/fieldDay', { title: 'মাঠ দিবস',success:''});
+    }
+     
+    //  records:result
+
+};
+
+module.exports.fieldDayFilter=async(req,res)=>{
+    await fieldDay.findAll({ 
+        where: {year: req.body.year,upazilla_id: req.body.upazilla}
+    })
+    .then(data => {
+        res.render('pd/fieldDay/fieldDayTable', {records: data} ,function(err, html) {
+            res.send(html);
+        });
+    })
+    .catch(err => {
+        res.render('pd/fieldDay/fieldDayYear', { title: 'মাঠ দিবস',success:'', records: err });
+    })
+
+};
+
+module.exports.fieldDayDistrictFilter=async(req,res)=>{
+    try{
+        // var dds=await dd.findAll({where: {id: req.body.district}});
+        var upazillass=await upazilla.findAll({where: {dd_id: req.body.district}});
+        console.log("inside");
+        res.send(upazillass)
+    }
+    catch(err){
+        console.log("outside",err);
+        res.render('pd/fieldDay/fieldDay', { title: 'মাঠ দিবস',success:'', upazillas:err });
+    }
+     
+
+};
+//fieldDay controller end
+
+//motivation controller
+module.exports.motivation=async(req,res)=>{
+    try{
+        var districts=await dd.findAll();
+        console.log("inside");
+        res.render('pd/motivation/motivation', { title: 'মোটিভেশন ট্যুর',success:'',district:districts });
+    }
+    catch(err){
+        console.log("outside",err);
+        res.render('pd/motivation/motivation', { title: 'মোটিভেশন ট্যুর',success:''});
+    }
+     
+    //  records:result
+
+};
+
+module.exports.motivationFilter=async(req,res)=>{
+    await motivation.findAll({ 
+        where: {year: req.body.year,upazilla_id: req.body.upazilla}
+    })
+    .then(data => {
+        res.render('pd/motivation/motivationTable', {records: data} ,function(err, html) {
+            res.send(html);
+        });
+    })
+    .catch(err => {
+        res.render('pd/motivation/motivationYear', { title: 'মোটিভেশন ট্যুর',success:'', records: err });
+    })
+
+};
+
+module.exports.motivationDistrictFilter=async(req,res)=>{
+    try{
+        // var dds=await dd.findAll({where: {id: req.body.district}});
+        var upazillass=await upazilla.findAll({where: {dd_id: req.body.district}});
+        console.log("inside");
+        res.send(upazillass)
+    }
+    catch(err){
+        console.log("outside",err);
+        res.render('pd/motivation/motivation', { title: 'মোটিভেশন ট্যুর',success:'', upazillas:err });
+    }
+     
+
+};
+//motivation controller end
+
+//review controller
+module.exports.review=async(req,res)=>{
+    try{
+        var districts=await dd.findAll();
+        console.log("inside");
+        res.render('pd/review/review', { title: 'রিভিউ ডিস্কাশন',success:'',district:districts });
+    }
+    catch(err){
+        console.log("outside",err);
+        res.render('pd/review/review', { title: 'রিভিউ ডিস্কাশন',success:''});
+    }
+     
+    //  records:result
+
+};
+
+module.exports.reviewFilter=async(req,res)=>{
+    await review.findAll({ 
+        where: {year: req.body.year,upazilla_id: req.body.upazilla}
+    })
+    .then(data => {
+        res.render('pd/review/reviewTable', {records: data} ,function(err, html) {
+            res.send(html);
+        });
+    })
+    .catch(err => {
+        res.render('pd/review/reviewYear', { title: 'রিভিউ ডিস্কাশন',success:'', records: err });
+    })
+
+};
+
+module.exports.reviewDistrictFilter=async(req,res)=>{
+    try{
+        // var dds=await dd.findAll({where: {id: req.body.district}});
+        var upazillass=await upazilla.findAll({where: {dd_id: req.body.district}});
+        console.log("inside");
+        res.send(upazillass)
+    }
+    catch(err){
+        console.log("outside",err);
+        res.render('pd/review/review', { title: 'রিভিউ ডিস্কাশন',success:'', upazillas:err });
+    }
+     
+
+};
+//review controller end
 
 //blockProgress controller
 module.exports.blockProgress=async(req,res)=>{

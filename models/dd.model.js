@@ -14,9 +14,6 @@ module.exports = (sequelize, Sequelize) => {
       password: {
         type: Sequelize.STRING
       },
-      ad_id: {
-        type: Sequelize.INTEGER
-      },
       pd_id: {
         type: Sequelize.INTEGER
       }

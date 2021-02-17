@@ -1,0 +1,230 @@
+<%- include('../../includes/header')-%>
+        <div class="wrapper">
+          <%- include('../../includes/topbar')-%>
+            <div class="page-wrap">
+              <%- include('../../includes/sidebar')-%>
+              <div class="main-content">
+                <div class="container-fluid">
+                    <div class="row clearfix">
+                    <div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <div class="panel-title"><h2>প্রশিক্ষণপ্রাপ্ত কৃষকের তথ্য ফর্ম</h2></div>
+                                <p><%
+                                if(success !=''){ %>
+                                <%= success %>
+                                    <% } %>
+                                </p>
+                                </div>  
+                            <div class="panel-body" >
+                                <form action="/upazilla/blockProgressEditPost/<%= records.id %>"  id="FieldTrialForm" class="form-horizontal" method="post"  role="form">
+                                    <div id="signupalert" style="display:none" class="alert alert-danger">
+                                        <p>Error:</p>
+                                        <span></span>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="aname" class="col-md-3 control-label">অঞ্চলের নাম</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="aname" placeholder="অঞ্চলের নাম" value="<%=records.aname%>">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <div class="col-md-9">
+                                            <label for="dname">জেলার নাম বাছুন:</label>
+                                        <select id="dname" name="dname" required value="<%=records.dname%>">
+                                        <option value="কক্সবাজার">কক্সবাজার</option>
+                                        <option value="কিশোরগঞ্জ">কিশোরগঞ্জ</option>
+                                        <option value="কুড়িগ্রাম">কুড়িগ্রাম</option>
+                                        <option value="কুমিল্লা">কুমিল্লা</option>
+                                        <option value="কুষ্টিয়া">কুষ্টিয়া</option>
+                                        <option value="খাগড়াছড়ি">খাগড়াছড়ি</option>
+                                        <option value="খুলনা">খুলনা</option>
+                                        <option value="গাইবান্ধা">গাইবান্ধা</option>
+                                        <option value="গাজীপুর">গাজীপুর</option>
+                                        <option value="গোপালগঞ্জ">গোপালগঞ্জ</option>
+                                        <option value="চট্টগ্রাম">চট্টগ্রাম</option>
+                                        <option value="চাঁদপুর">চাঁদপুর</option>
+                                        <option value="চাঁপাইনবাবগঞ্জ">চাঁপাইনবাবগঞ্জ</option>
+                                        <option value="চুয়াডাঙ্গা">চুয়াডাঙ্গা</option>
+                                        <option value="জয়পুরহাট">জয়পুরহাট</option>
+                                        <option value="জামালপুর">জামালপুর</option>
+                                        <option value="ঝালকাঠি">ঝালকাঠি</option>
+                                        <option value="ঝিনাইদহ">ঝিনাইদহ</option>
+                                        <option value="টাঙ্গাইল">টাঙ্গাইল</option>
+                                        <option value="ঠাকুরগাঁও">ঠাকুরগাঁও</option>
+                                        <option value="ঢাকা">ঢাকা</option>
+                                        <option value="দিনাজপুর">দিনাজপুর</option>
+                                        <option value="নওগাঁ">নওগাঁ</option>
+                                        <option value="নড়াইল">নড়াইল</option>
+                                        <option value="নরসিংদি">নরসিংদি</option>
+                                        <option value="নাটোর">নাটোর</option>
+                                        <option value="নারায়ণগঞ্জ">নারায়ণগঞ্জ</option>
+                                        <option value="নীলফামারি">নীলফামারি</option>
+                                        <option value="নেত্রকোনা">নেত্রকোনা</option>
+                                        <option value="নোয়াখালি">নোয়াখালি</option>
+                                        <option value="পঞ্চগড়">পঞ্চগড়</option>
+                                        <option value="পটুয়াখালি">পটুয়াখালি</option>
+                                        <option value="পাবনা">পাবনা</option>
+                                        <option value="পিরোজপুর">পিরোজপুর</option>
+                                        <option value="ফরিদপুর">ফরিদপুর</option>
+                                        <option value="ফেনী">ফেনী</option>
+                                        <option value="বগুড়া">বগুড়া</option>
+                                        <option value="বরগুনা">বরগুনা</option>
+                                        <option value="বরিশাল">বরিশাল</option>
+                                        <option value="বাগেরহাট">বাগেরহাট</option>
+                                        <option value="বান্দরবান">বান্দরবান</option>
+                                        <option value="ব্রাহ্মণবাড়িয়া">ব্রাহ্মণবাড়িয়া</option>
+                                        <option value="ভোলা">ভোলা</option>
+                                        <option value="ময়মনসিংহ">ময়মনসিংহ</option>
+                                        <option value="মাগুরা">মাগুরা</option>
+                                        <option value="মাদারিপুর">মাদারিপুর</option>
+                                        <option value="মানিকগঞ্জ">মানিকগঞ্জ</option>
+                                        <option value="মুন্সিগঞ্জ">মুন্সিগঞ্জ</option>
+                                        <option value="মেহেরপুর">মেহেরপুর</option>
+                                        <option value="মৌলভীবাজার">মৌলভীবাজার</option>
+                                        <option value="যশোর">যশোর</option>
+                                        <option value="রংপুর">রংপুর</option>
+                                        <option value="রাঙ্গামাটি">রাঙ্গামাটি</option>
+                                        <option value="রাজবাড়ি">রাজবাড়ি</option>
+                                        <option value="রাজশাহী">রাজশাহী</option>
+                                        <option value="লক্ষ্মীপুর">লক্ষ্মীপুর</option>
+                                        <option value="লালমনিরহাট">লালমনিরহাট</option>
+                                        <option value="শরিয়তপুর">শরিয়তপুর</option>
+                                        <option value="শেরপুর">শেরপুর</option>
+                                        <option value="সাতক্ষীরা">সাতক্ষীরা</option>
+                                        <option value="সিরাজগঞ্জ">সিরাজগঞ্জ</option>
+                                        <option value="সিলেট">সিলেট</option>
+                                        <option value="সুনামগঞ্জ">সুনামগঞ্জ</option>
+                                        <option value="হবিগঞ্জ">হবিগঞ্জ</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="upazilla" class="col-md-3 control-label">উপজেলার নাম</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="upazilla" placeholder="উপজেলার নাম" value="<%=records.upazilla%>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-9">
+                                            <label for="crop">ফসলের নাম বাছুন:</label>
+                                        <select id="crop" name="crop" required value="<%=records.crop%>"> 
+                                            <option value="মসুর">মসুর</option>
+                                            <option value="মুগ">মুগ</option>
+                                            <option value="খেসারি">খেসারি</option>
+                                            <option value="ফেলন">ফেলন</option>
+                                            <option value="সরিষা">সরিষা</option>
+                                            <option value="সয়াবিন">সয়াবিন</option>
+                                            <option value="চিনাবাদাম">চিনাবাদাম</option>
+                                            <option value="সূর্যমুখী">সূর্যমুখী</option>
+                                            <option value="পেঁয়াজ">পেঁয়াজ</option>
+                                            <option value="রসুন">রসুন</option>
+                                            <option value="মরিচ">মরিচ</option>
+                                            <option value="ধনিয়া">ধনিয়া</option>
+                                            <option value="কালোজিরা">কালোজিরা</option>
+                                            <option value="গবেষণা">গবেষণা</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="trialnum" class="col-md-3 control-label">প্রদরশনীর সংখ্যা</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="trialnum" placeholder="প্রদরশনীর সংখ্যা" value="<%=records.trialnum%>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="seed" class="col-md-3 control-label">বীজ বপন</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="seed" placeholder="বীজ বপন" value="<%=records.seed%>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="organic" class="col-md-3 control-label">জৈবসার সরবরাহ</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="organic" placeholder="জৈবসার সরবরাহ" value="<%=records.organic%>">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="chemical" class="col-md-3 control-label">রাসায়নিক সার সরবরাহ</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="chemical" placeholder="রাসায়নিক সার সরবরাহ" value="<%=records.chemical%>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="purify" class="col-md-3 control-label">বীজ শোধন</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="purify" placeholder="বীজ শোধন" value="<%=records.purify%>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="balainashok" class="col-md-3 control-label">বালাইনাশক</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="balainashok" placeholder="বালাইনাশক" value="<%=records.balainashok%>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="agacha" class="col-md-3 control-label">আগাছা বাছাই ও রগিং</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="agacha" placeholder="আগাছা বাছাই ও রগিং" value="<%=records.agacha%>">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="signboard" class="col-md-3 control-label">সাইনবোর্ড ও খুটি</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="signboard" placeholder="সাইনবোর্ড ও খুটি" value="<%=records.signboard%>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="register" class="col-md-3 control-label">রেজিস্টার লিখন</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="register" placeholder="রেজিস্টার লিখন" value="<%=records.register%>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="comment" class="col-md-3 control-label">মন্তব্য/ফসলের সার্বিক অবস্থা</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="comment" placeholder="মন্তব্য/ফসলের সার্বিক অবস্থা" value="<%=records.comment%>">
+                                        </div>
+                                    </div>
+                                        
+
+                                    <input type="hidden" class="form-control" name="year" placeholder="বছর" value="<%=records.year%>">
+
+                                    
+                                   
+                                    <input type="hidden" class="form-control" name="user_id" placeholder="id" value="<%= user_id %>">
+                                    
+                                    
+                                    <div class="form-group">
+                                        <!-- Button -->                                        
+                                        <div class="col-md-offset-3 col-md-9">
+                                        <input type="submit" name="submit" value="submit" class="btn btn-primary">   
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                        
+                                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<%- include('../../includes/footer')-%>

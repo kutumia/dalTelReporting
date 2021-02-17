@@ -1,0 +1,48 @@
+<%if (records.length >0){ %>
+    <table class="table table-bordered table-striped" id="tblCustomers" cellspacing="0" cellpadding="0">
+    <thead>
+    <tr>
+        <th>মাঠ দিবস অনুষ্ঠানের তারিখ</th>
+        <th>উপস্থিতি</th>
+        <th>পুরুষ উপস্থিতির সংখ্যা</th>  
+        <th>মহিলা উপস্থিতির সংখ্যা</th>
+        <th>রিসোর্স ব্যক্তির নাম</th>
+        <th>রিসোর্স ব্যক্তির পরিচয়</th>
+
+    </tr>
+    </thead>  
+    <tbody>
+        <% records.forEach(function(row){ %>
+            <tr>
+                <td><%= row.date %></td>
+                <td><%= row.present %></td>
+                <td><%= row.male %></td>
+                <td><%= row.female %></td>
+                <td><%= row.resource %></td>
+                <td><%= row.resourceDetails %></td>
+               
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
+<% }else{ %>
+    <table class="table table-bordered table-striped" id="tblCustomers" cellspacing="0" cellpadding="0">
+        <thead>
+        <tr>
+            <th>মাঠ দিবস অনুষ্ঠানের তারিখ</th>
+            <th>উপস্থিতি</th>
+            <th>পুরুষ উপস্থিতির সংখ্যা</th>
+            <th>মহিলা উপস্থিতির সংখ্যা</th>
+            <th>রিসোর্স ব্যক্তির নাম</th>
+            <th>রিসোর্স ব্যক্তির পরিচয়</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% records.forEach(function(row){ %>
+            <tr>
+                <td colspan="10">No data Found</td>
+            </tr>
+        <% }) %>
+        </tbody>
+    </table>
+<% } %>

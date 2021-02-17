@@ -10,6 +10,10 @@ const seedInitial = db.seedInitial;
 const seedProgress = db.seedProgress;
 const progress = db.progress;
 const preservedProgress = db.preservedProgress;
+const review = db.review;
+const motivation = db.motivation;
+const fieldDay = db.fieldDay;
+
 
 const jwt= require('jsonwebtoken');
 const bcrypt= require('bcryptjs'); 
@@ -107,24 +111,25 @@ module.exports.ddsignup=async(req,res)=>{
 };
 module.exports.ddsignuppost=async(req,res)=>{
     try {
-        const{ads,uname,password,confirmPassword}=req.body;
+        const{district,uname,password,confirmPassword}=req.body;
         const data = await dd.findAll({ where: {uname: uname} })
         if(data.length > 0){
-            res.render('dd/signup',{title: 'ডাল,তেল ও মসলা বীজ উৎপাদন সংরক্ষণ ও বিতরণ (৩য় পর্যায়) প্রকল্প',msg:'ERROR: The dd is already enrolled!' })
+            res.render('dd/signup',{title: 'কৃষক পর্যায়ে উন্নতমানের ডাল,তেল ও মসলা বীজ উৎপাদন সংরক্ষণ ও বিতরণ (৩য় পর্যায়) প্রকল্প ',msg:'ERROR: The dd is already enrolled!',records: data })
         }
         else if(password !== confirmPassword){
-            return res.render('dd/signup',{title: 'ডাল,তেল ও মসলা বীজ উৎপাদন সংরক্ষণ ও বিতরণ (৩য় পর্যায়) প্রকল্প',msg:'ERROR: Passwords do not match!' })
+            return res.render('dd/signup',{title: 'কৃষক পর্যায়ে উন্নতমানের ডাল,তেল ও মসলা বীজ উৎপাদন সংরক্ষণ ও বিতরণ (৩য় পর্যায়) প্রকল্প ',msg:'ERROR: Passwords do not match!' })
         }
         else{
             const hashedPassword = await bcrypt.hash(password, 10);
             console.log(hashedPassword);
             try{
                 const createdd = await dd.create({
+                    district:district,
                     uname: uname,
                     password:hashedPassword,
                     pd_id:1
-                    })
-                res.render('dd/signup',{title: 'ডাল,তেল ও মসলা বীজ উৎপাদন সংরক্ষণ ও বিতরণ (৩য় পর্যায়) প্রকল্প',msg:'dd Registered Successfully!'})
+                })
+                res.render('dd/signup',{title: 'কৃষক পর্যায়ে উন্নতমানের ডাল,তেল ও মসলা বীজ উৎপাদন সংরক্ষণ ও বিতরণ (৩য় পর্যায়) প্রকল্প ',msg:'dd Registered Successfully!' })
             }
             catch (err) {
                 console.log(err);
@@ -137,6 +142,99 @@ module.exports.ddsignuppost=async(req,res)=>{
     } 
 };
 //signUp controller end
+//fieldDay controller
+module.exports.fieldDay=async(req,res)=>{ 
+    try{
+        var upazillass=await upazilla.findAll({where: {dd_id: req.session.user_id}});
+        console.log("inside");
+        res.render('dd/fieldDay/fieldDay', { title: 'মাঠ দিবস',success:'',upazillas:upazillass });
+    }
+    catch(err){
+        console.log("outside",err);
+        res.render('dd/fieldDay/fieldDay', { title: 'মাঠ দিবস',success:'', upazillas:err });
+    }
+     
+    //  records:result
+
+};
+
+module.exports.fieldDayFilter=async(req,res)=>{
+    await fieldDay.findAll({ 
+        where: {year: req.body.year,upazilla_id: req.body.upazilla}
+    })
+    .then(data => {
+        res.render('dd/fieldDay/fieldDayTable', {records: data} ,function(err, html) {
+            res.send(html);
+        });
+    })
+    .catch(err => {
+        res.render('dd/fieldDay/fieldDayFilter', { title: 'মাঠ দিবস',success:'', records: err });
+    })
+
+};
+//fieldDay controller end
+//review controller
+module.exports.review=async(req,res)=>{ 
+    try{
+        var upazillass=await upazilla.findAll({where: {dd_id: req.session.user_id}});
+        console.log("inside");
+        res.render('dd/review/review', { title: 'রিভিউ ডিস্কাশন',success:'',upazillas:upazillass });
+    }
+    catch(err){
+        console.log("outside",err);
+        res.render('dd/review/review', { title: 'রিভিউ ডিস্কাশন',success:'', upazillas:err });
+    }
+     
+    //  records:result
+
+};
+
+module.exports.reviewFilter=async(req,res)=>{
+    await review.findAll({ 
+        where: {year: req.body.year,upazilla_id: req.body.upazilla}
+    })
+    .then(data => {
+        res.render('dd/review/reviewTable', {records: data} ,function(err, html) {
+            res.send(html);
+        });
+    })
+    .catch(err => {
+        res.render('dd/review/reviewFilter', { title: 'রিভিউ ডিস্কাশন',success:'', records: err });
+    })
+
+};
+//review controller end
+//motivation controller
+module.exports.motivation=async(req,res)=>{ 
+    try{
+        var upazillass=await upazilla.findAll({where: {dd_id: req.session.user_id}});
+        console.log("inside");
+        res.render('dd/motivation/motivation', { title: 'মোটিভেশন ট্যুর',success:'',upazillas:upazillass });
+    }
+    catch(err){
+        console.log("outside",err);
+        res.render('dd/motivation/motivation', { title: 'মোটিভেশন ট্যুর',success:'', upazillas:err });
+    }
+     
+    //  records:result
+
+};
+
+module.exports.motivationFilter=async(req,res)=>{
+    await motivation.findAll({ 
+        where: {year: req.body.year,upazilla_id: req.body.upazilla}
+    })
+    .then(data => {
+        res.render('dd/motivation/motivationTable', {records: data} ,function(err, html) {
+            res.send(html);
+        });
+    })
+    .catch(err => {
+        res.render('dd/motivation/motivationFilter', { title: 'মোটিভেশন ট্যুর',success:'', records: err });
+    })
+
+};
+//motivation controller end
 
 //blockProgress controller
 module.exports.blockProgress=async(req,res)=>{ 
@@ -298,7 +396,7 @@ module.exports.seedProgressFilter=async(req,res)=>{
 };
 //seedProgress controller end
 
-//blockProgress controller
+//progress controller
 module.exports.progress=async(req,res)=>{
     await progress.findAll({
         where: {dd_id: req.session.user_id}
@@ -371,16 +469,58 @@ module.exports.progressFormPost=async(req,res)=>{
   
 };
 module.exports.progressEdit=async(req,res)=>{
-    var id=req.params.id;
-    console.log('id',id);
-    res.render('dd/progress/progressForm', { title: ' অগ্রগতির প্রতিবেদন ',msg:'' ,success:'',user_id: req.session.user_id});
+    await progress.findByPk(req.params.id)
+    .then(data => {
+        console.log("inside");
+        res.render('dd/progress/progressEdit', { title: 'প্রশিক্ষণপ্রাপ্ত কৃষকের তথ্য',msg:'' ,success:'',records:data,user_id: req.session.user_id});
+    })
+    .catch(err => {
+        console.log("err");
+    })
 };
+module.exports.progressEditPost=async(req,res)=>{
+    var upazilla= req.body.upazilla;
+    var sme= req.body.sme;
+    var robi= req.body.robi;
+    var kharifone= req.body.kharifone;
+    var khariftwo= req.body.khariftwo;
+    var block= req.body.block;
+    var gojano= req.body.gojano;
+    var comment= req.body.comment;
+    var year =req.body.year;
+    var user_id =req.body.user_id;
 
-module.exports.progressDelete=async(req,res)=>{
-   
+    await progress.update({
+        upazilla:upazilla,
+        sme:sme,
+        robi:robi,
+        kharifone:kharifone,
+        khariftwo:khariftwo,
+        block:block,
+        gojano:gojano,
+        comment:comment,
+        year:year,
+    },
+    {
+        where: {id: req.params.id}
+    })
+        .then(data => {
             res.redirect('/dd/progress');
-        
+        }).catch(err => {
+            res.render('errorpage',err);
+        });
   
+  
+};
+module.exports.progressDelete=async(req,res)=>{
+    var progressDelete = await progress.findByPk(req.params.id);
+    try {
+        progressDelete.destroy();
+        res.redirect("/dd/progress");
+    }
+    catch{
+        res.render('errorpage',err);
+    }
 };
 //progress controller end
 
@@ -453,15 +593,53 @@ module.exports.preservedProgressFormPost=async(req,res)=>{
   
 };
 module.exports.preservedProgressEdit=async(req,res)=>{
-    var id=req.params.id;
-    console.log('id',id);
-    res.render('dd/preservedProgress/preservedProgressForm', { title: 'বীজ উৎপাদনে ব্লকে উৎপাদিত ও সংরক্ষিত বীজের পরিমাণ তথ্য',msg:'' ,success:'',user_id: req.session.user_id});
+    await preservedProgress.findByPk(req.params.id)
+    .then(data => {
+        console.log("inside");
+        res.render('dd/preservedProgress/preservedProgressEdit', { title: 'প্রশিক্ষণপ্রাপ্ত কৃষকের তথ্য',msg:'' ,success:'',records:data,user_id: req.session.user_id});
+    })
+    .catch(err => {
+        console.log("err");
+    })
 };
+module.exports.preservedProgressEditPost=async(req,res)=>{
+    var name= req.body.name;
+    var production= req.body.production;
+    var preserved= req.body.preserved;
+    var sold= req.body.sold;
+    var customer= req.body.customer;
+    var comment= req.body.comment;
+    var year =req.body.year;
+    var user_id =req.body.user_id;
 
-module.exports.preservedProgressDelete=async(req,res)=>{
-   
+    await preservedProgress.update({
+        name: name,
+        production:production,
+        preserved:preserved,
+        sold:sold,
+        customer:customer,
+        comment:comment,
+        year:year,
+    },
+    {
+        where: {id: req.params.id}
+    })
+        .then(data => {
             res.redirect('/dd/preservedProgress');
-        
+        }).catch(err => {
+            res.render('errorpage',err);
+        });
   
+  
+};
+module.exports.preservedProgressDelete=async(req,res)=>{
+    var preservedProgressDelete = await preservedProgress.findByPk(req.params.id);
+    try {
+        preservedProgressDelete.destroy();
+        res.redirect("/dd/preservedProgress");
+    }
+    catch{
+        res.render('errorpage',err);
+    }
 };
 //preservedProgress controller end

@@ -1,0 +1,109 @@
+<%- include('../../includes/header')-%>
+        <div class="wrapper">
+          <%- include('../../includes/topbar')-%>
+            <div class="page-wrap">
+              <%- include('../../includes/sidebar')-%>
+              <div class="main-content">
+                <div class="container-fluid">
+                    <div class="row clearfix">
+                    <div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <div class="panel-title"><h2>প্রশিক্ষণপ্রাপ্ত কৃষকের তথ্য ফর্ম</h2></div>
+                                <p><%
+                                if(success !=''){ %>
+                                <%= success %>
+                                    <% } %>
+                                </p>
+                                </div>  
+                            <div class="panel-body" >
+                                <form action="/dd/progressEditPost/<%= records.id %>"  id="FieldTrialForm" class="form-horizontal" method="post"  role="form">
+                                    <div id="signupalert" style="display:none" class="alert alert-danger">
+                                        <p>Error:</p>
+                                        <span></span>
+                                    </div>
+
+                                    
+                                    <div class="form-group">
+                                        <label for="upazilla" class="col-md-3 control-label">উপজেলার নাম</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="upazilla" placeholder="উপজেলার নাম" value="<%=records.upazilla%>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="sme" class="col-md-3 control-label">মোট এসএমইর'র সংখ্যা</label>
+                                        <div class="col-md-9">
+                                        <input type="text" class="form-control" name="sme" placeholder="মোট এসএমইর'র সংখ্যা" value="<%=records.sme%>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="robi" class="col-md-3 control-label">উপজেলাতে বরাদ্দকৃত বাৎসরিক ব্লক প্রদর্শনীর সংখ্যা (রবি)</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="robi" placeholder="উপজেলাতে বরাদ্দকৃত বাৎসরিক ব্লক প্রদর্শনীর সংখ্যা (রবি)" value="<%=records.robi%>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="kharifone" class="col-md-3 control-label">উপজেলাতে বরাদ্দকৃত বাৎসরিক ব্লক প্রদর্শনীর সংখ্যা (খরিফ-১)</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="kharifone" placeholder="উপজেলাতে বরাদ্দকৃত বাৎসরিক ব্লক প্রদর্শনীর সংখ্যা (খরিফ-১)" value="<%=records.kharifone%>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="khariftwo" class="col-md-3 control-label">উপজেলাতে বরাদ্দকৃত বাৎসরিক ব্লক প্রদর্শনীর সংখ্যা (খরিফ-২)</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="khariftwo" placeholder="মৌ বক্সের সংখ্যা" value="<%=records.khariftwo%>">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="block" class="col-md-3 control-label">মাঠে বপনকৃত অবস্থায় আছে এমন ব্লক প্রদর্শনীর সংখ্যা</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="block" placeholder="মাঠে বপনকৃত অবস্থায় আছে এমন ব্লক প্রদর্শনীর সংখ্যা" value="<%=records.block%>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="gojano" class="col-md-3 control-label">গজানোর হার ও মাঠের সার্বিক অবস্থা</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="gojano" placeholder="গজানোর হার ও মাঠের সার্বিক অবস্থা" value="<%=records.gojano%>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="comment" class="col-md-3 control-label">মন্তব্য</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="comment" placeholder="মন্তব্য" value="<%=records.comment%>">
+                                        </div>
+                                    </div>
+
+
+                                    <input type="hidden" class="form-control" name="year" placeholder="বছর" value="<%=records.year%>">
+
+                                    
+                                   
+                                    <input type="hidden" class="form-control" name="user_id" placeholder="id" value="<%= user_id %>">
+                                    
+                                    
+                                    <div class="form-group">
+                                        <!-- Button -->                                        
+                                        <div class="col-md-offset-3 col-md-9">
+                                        <input type="submit" name="submit" value="submit" class="btn btn-primary">   
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                        
+                                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<%- include('../../includes/footer')-%>

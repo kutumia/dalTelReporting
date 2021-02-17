@@ -3,7 +3,8 @@ const router = express.Router();
 // const { Router } = require("express");
 const app=express();
 
-const {pdsignup,pdsignuppost,pdlogin,pdloginpost,pdDashboard,blockProgress,blockProgressFilter,blockProgressDistrictFilter,honey,honeyFilter,honeyDistrictFilter,
+const {pdsignup,pdsignuppost,pdlogin,pdloginpost,pdDashboard,review,reviewFilter,reviewDistrictFilter,fieldDay,fieldDayFilter,fieldDayDistrictFilter,motivation,motivationFilter,motivationDistrictFilter,
+    blockProgress,blockProgressFilter,blockProgressDistrictFilter,honey,honeyFilter,honeyDistrictFilter,
     recievedCrops,recievedCropsFilter,recievedCropsDistrictFilter,seedInitial,seedInitialFilter,seedInitialDistrictFilter,seedProgress,seedProgressFilter,seedProgressDistrictFilter,
     progress,progressFilter,preservedProgress,preservedProgressFilter} = require('../controllers/pd.controller');
 router.get('/login',pdlogin);
@@ -12,6 +13,18 @@ router.get('/dashboard',pdDashboard);
 
 router.get('/signup',pdsignup);
 router.post('/signups',pdsignuppost);
+
+router.get('/review',review);
+router.post('/reviewFilter',reviewFilter);
+router.post('/reviewDistrictFilter',reviewDistrictFilter);
+
+router.get('/fieldDay',fieldDay);
+router.post('/fieldDayFilter',fieldDayFilter);
+router.post('/fieldDayDistrictFilter',fieldDayDistrictFilter);
+
+router.get('/motivation',motivation);
+router.post('/motivationFilter',motivationFilter);
+router.post('/motivationDistrictFilter',motivationDistrictFilter);
 
 router.get('/blockProgress',blockProgress);
 router.post('/blockProgressFilter',blockProgressFilter);
